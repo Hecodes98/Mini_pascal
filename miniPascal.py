@@ -1,4 +1,4 @@
-import ply.lex as lex
+import ply.lex as lex, re
 import sys
 
 # list of tokens
@@ -134,7 +134,7 @@ t_HASHTAG = r'\#'
 t_DOT = r'\.'
 
 def t_BEGIN(t):
-    r'(begin|BEGIN)'
+    r'begin'
     return t
 
 def t_AUTO(t):
@@ -462,7 +462,7 @@ def test(data, lexer):
         print (tok)
         
 
-lexer = lex.lex()
+lexer = lex.lex(reflags=re.IGNORECASE)
 
  
 if __name__ == '__main__':

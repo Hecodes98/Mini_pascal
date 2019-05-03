@@ -14,7 +14,7 @@ begin
    write('Introduzca un número===> '); readln(num);
    writeln;writeln;
    while (divisor<num) and primo do
-   BEGIN
+   begin
      if num mod divisor = 0 then
           primo:=false;
      divisor:=divisor+1
