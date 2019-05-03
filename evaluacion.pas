@@ -1,23 +1,33 @@
-program fibonacci;
-uses crt;
+{ Programa que determina si un número N es primo. (Un número primo sólo
+  puede ser divisible por el mismo y la unidad...compilado en
+  en Borland Pascal para Windows Version 7.0}
+program primos;
+uses wincrt;
 var
- a,b,c,max:integer;
+  primo  :boolean;
+  num,divisor:integer;
 begin
-clrscr;
- writeln('Serie de Fibonacci');
- writeln('Teclea el numero tope de la serie');
- writeln('');
- readln(max);
- a:=1;
- b:=1;
- writeln(a);
- writeln(b);
- while (a+b)<=max do
-  begin;
-  c:=(a+b);
-  writeln(c);
-  a:=b;
-  b:=c;
-  end;
- readln;
+   primo:=true;
+   divisor:=2;
+   writeln('<===Programa que Determina si un Número es Primo o No===>');
+   writeln; writeln;
+   write('Introduzca un número===> '); readln(num);
+   writeln;writeln;
+   while (divisor<num) and primo do
+   BEGIN
+     if num mod divisor = 0 then
+          primo:=false;
+     divisor:=divisor+1
+   end;
+ if primo = true then
+    writeln(num,' Es número Primo...')
+ else
+    writeln(num,' No es un número Primo...');
+ writeln;
+ writeln;
+ writeln('Diseñado por: Victor Manuel Evaristo Salinas');
+ writeln;
+ writeln;
+ writeln('E-mail: victor_mes@hotmail.com y vmanuel_es@yahoo.com.mx');
+ writeln;
 end.

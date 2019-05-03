@@ -17,7 +17,6 @@ tokens = (
     'CONST',
     'CONSTRUCTOR',
     'DESTRUCTOR',
-    'DIV',
     'DO',
     'DOWNTO',
     'END',
@@ -63,6 +62,10 @@ tokens = (
     'WITH',
     'XOR',
     'LONG',
+    'WRITELN',
+    'WRITE',
+    'BOOLEAN',
+    'READLN',
 
     # Symbols
     'PLUS',
@@ -93,6 +96,8 @@ tokens = (
     'AMPERSANT',
     'HASHTAG',
     'DOT',
+    'TRUE',
+    'FALSE',
     
     # Others   
     'ID', 
@@ -100,6 +105,13 @@ tokens = (
 )
 
 # Regular expressions rules for a simple tokens 
+
+# def t_WRITELN(t):
+#     r'writeln\(\'(.)*?\'\)'
+#     return t
+
+
+
 t_PLUS   = r'\+'
 t_MINUS  = r'-'
 t_TIMES  = r'\*'
@@ -121,6 +133,10 @@ t_AMPERSANT = r'\&'
 t_HASHTAG = r'\#'
 t_DOT = r'\.'
 
+def t_BEGIN(t):
+    r'(begin|BEGIN)'
+    return t
+
 def t_AUTO(t):
     r'auto'
     return t
@@ -137,10 +153,6 @@ def t_ARRAY(t):
     r'array'
     return t
 
-def t_BEGIN(t):
-    r'begin'
-    return t
-
 def t_CONST(t):
     r'const'
     return t
@@ -153,13 +165,21 @@ def t_DESTRUCTOR(t):
     r'Destructor'
     return t
 
-def t_DIV(t):
-    r'div'
-    return t
+def t_INTEGER(t):
+	r'integer'
+	return t
 
 def t_DOWNTO(t):
     r'downto'
     return t
+
+def t_FALSE(t):
+    r'false'
+    return t 
+
+def t_TRUE(t):
+    r'true'
+    return t    
 
 def t_END(t):
     r'end'
@@ -314,7 +334,6 @@ def t_INCLUDE(t):
     r'include'
     return t
 
-
 def t_DEFINE(t):
     r'define'
     return t
@@ -351,10 +370,6 @@ def t_IF(t):
     r'if'
     return t
 
-def t_INTEGER(t):
-	r'integer'
-	return t
-
 def t_SHORT(t):
     r'short'
     return t
@@ -371,13 +386,21 @@ def t_WHILE(t):
 	r'while'
 	return t
 
+def t_WRITELN(t):
+    r'writeln'
+    return t
+
+def t_WRITE(t):
+    r'write'
+    return t
+
+def t_READLN(t):
+    r'readln'
+    return t
+
 def t_NUMBER(t):
     r'\d+(\.\d+)?'
     t.value = float(t.value)
-    return t
-
-def t_ID(t):
-    r'\w+(_\d\w)*'
     return t
 
 def t_LESSEQUAL(t):
@@ -414,9 +437,12 @@ def t_TEXT(t):
     r'\'(.|\n)*?\''
     return t
 
+def t_ID(t):
+    r'\w+(_\d\w)*'
+    return t
 
 def t_comments(t):
-    r'/{(.|\n)*?}/'
+    r'{(.|\n)*?}'
     t.lexer.lineno += t.value.count('\n')
 
 def t_comments_C99(t):
@@ -428,12 +454,13 @@ def t_error(t):
     t.lexer.skip(1)
     
 def test(data, lexer):
-	lexer.input(data)
-	while True:
-		tok = lexer.token()
-		if not tok:
-			break
-		print (tok)
+    lexer.input(data)
+    while True:
+        tok = lexer.token()
+        if not tok:
+            break
+        print (tok)
+        
 
 lexer = lex.lex()
 
