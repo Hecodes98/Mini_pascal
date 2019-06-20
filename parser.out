@@ -1,0 +1,2501 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    OBJECT
+    LBRACKET
+    FILE
+    TRUE
+    PACKED
+    ABSOLUTE
+    RECORD
+    IMPLEMENTATION
+    LONG
+    GOTO
+    REINTRODUCE
+    PROCEDURE
+    NIL
+    OF
+    INTERFACE
+    LABEL
+    AMPERSANT
+    BREAK
+    WITH
+    FUNCTION
+    SHR
+    REPEAT
+    PLUSPLUS
+    RBLOCK
+    INHERITED
+    OPERATOR
+    SHL
+    UNTIL
+    UNIT
+    CLRSCR
+    CASE
+    SET
+    ARRAY
+    ASM
+    WRITE
+    FALSE
+    READLN
+    INLINE
+    TYPE
+    CONST
+    CONSTRUCTOR
+    STRING
+    IN
+    LBLOCK
+    MINUSMINUS
+    SELF
+    DESTRUCTOR
+    HASHTAG
+    RBRACKET
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> declaration_list
+Rule 2     declaration_list -> declaration_list declaration
+Rule 3     declaration_list -> declaration
+Rule 4     declaration -> header_declaration
+Rule 5     declaration -> var_declaration
+Rule 6     declaration -> procedure_declaration
+Rule 7     header_declaration -> PROGRAM ID SEMICOLON
+Rule 8     header_declaration -> USES ID header_declaration_3 SEMICOLON
+Rule 9     header_declaration_3 -> COMMA ID header_declaration_3
+Rule 10    header_declaration_3 -> empty
+Rule 11    var_declaration -> VAR var_declaration_2
+Rule 12    var_declaration_2 -> ID var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4
+Rule 13    var_declaration_3 -> COMMA ID var_declaration_3
+Rule 14    var_declaration_3 -> empty
+Rule 15    var_declaration_4 -> var_declaration_2
+Rule 16    var_declaration_4 -> empty
+Rule 17    empty -> <empty>
+Rule 18    type_specifier -> INTEGER
+Rule 19    type_specifier -> REAL
+Rule 20    type_specifier -> CHAR
+Rule 21    type_specifier -> BOOLEAN
+Rule 22    procedure_declaration -> BEGIN instruction END DOT
+Rule 23    instruction -> asignation instruction
+Rule 24    instruction -> writing instruction
+Rule 25    instruction -> cycles instruction
+Rule 26    instruction -> empty
+Rule 27    instruction_one_line -> asignation
+Rule 28    instruction_one_line -> writing
+Rule 29    instruction_one_line -> cycles
+Rule 30    writing -> WRITELN LPAREN TEXT RPAREN SEMICOLON
+Rule 31    writing -> WRITELN LPAREN id_num RPAREN SEMICOLON
+Rule 32    writing -> WRITELN SEMICOLON
+Rule 33    asignation -> ID EQUAL id_num SEMICOLON
+Rule 34    asignation_for -> ID EQUAL id_num
+Rule 35    cycles -> type_cycle
+Rule 36    type_cycle -> while
+Rule 37    type_cycle -> if
+Rule 38    type_cycle -> for
+Rule 39    type_cycle -> cycles instruction
+Rule 40    while -> WHILE internexpression op_cycle DO otherBegin
+Rule 41    if -> IF internexpression op_cycle THEN otherBegin_if
+Rule 42    if -> IF internexpression op_cycle THEN instruction_one_line
+Rule 43    if -> IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+Rule 44    if -> IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+Rule 45    if -> IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+Rule 46    if -> IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+Rule 47    for -> FOR asignation_for TO id_num DO otherBegin
+Rule 48    for -> FOR asignation_for DOWNTO id_num DO otherBegin
+Rule 49    op_cycle -> op_logic internexpression op_cycle
+Rule 50    op_cycle -> empty
+Rule 51    internexpression -> parentheses
+Rule 52    internexpression -> expression
+Rule 53    parentheses -> LPAREN expression RPAREN
+Rule 54    expression -> ID type_op ID
+Rule 55    id_num -> NUMBER
+Rule 56    id_num -> ID
+Rule 57    expression -> id_num type_op id_num
+Rule 58    expression -> id_num
+Rule 59    expression -> id_num type_op_math id_num ISEQUAL id_num
+Rule 60    type_op -> LESSEQUAL
+Rule 61    type_op -> LESS
+Rule 62    type_op -> GREATER
+Rule 63    type_op -> GREATEREQUAL
+Rule 64    type_op -> ISEQUAL
+Rule 65    type_op -> DEQUAL
+Rule 66    type_op -> DISTINT
+Rule 67    type_op_math -> PLUS
+Rule 68    type_op_math -> MINUS
+Rule 69    type_op_math -> TIMES
+Rule 70    type_op_math -> DIVIDE
+Rule 71    type_op_math -> MOD
+Rule 72    op_logic -> AND
+Rule 73    op_logic -> OR
+Rule 74    op_logic -> XOR
+Rule 75    op_logic -> NOT
+Rule 76    otherBegin -> BEGIN instruction END SEMICOLON instruction
+Rule 77    otherBegin_if -> BEGIN instruction END instruction
+
+Terminals, with rules where they appear
+
+ABSOLUTE             : 
+AMPERSANT            : 
+AND                  : 72
+ARRAY                : 
+ASM                  : 
+BEGIN                : 22 76 77
+BOOLEAN              : 21
+BREAK                : 
+CASE                 : 
+CHAR                 : 20
+CLRSCR               : 
+COLON                : 12
+COMMA                : 9 13
+CONST                : 
+CONSTRUCTOR          : 
+DEQUAL               : 65
+DESTRUCTOR           : 
+DISTINT              : 66
+DIVIDE               : 70
+DO                   : 40 47 48
+DOT                  : 22
+DOWNTO               : 48
+ELSE                 : 43 44 45 46
+END                  : 22 76 77
+EQUAL                : 33 34
+FALSE                : 
+FILE                 : 
+FOR                  : 47 48
+FUNCTION             : 
+GOTO                 : 
+GREATER              : 62
+GREATEREQUAL         : 63
+HASHTAG              : 
+ID                   : 7 8 9 12 13 33 34 54 54 56
+IF                   : 41 42 43 44 45 46
+IMPLEMENTATION       : 
+IN                   : 
+INHERITED            : 
+INLINE               : 
+INTEGER              : 18
+INTERFACE            : 
+ISEQUAL              : 59 64
+LABEL                : 
+LBLOCK               : 
+LBRACKET             : 
+LESS                 : 61
+LESSEQUAL            : 60
+LONG                 : 
+LPAREN               : 30 31 53
+MINUS                : 68
+MINUSMINUS           : 
+MOD                  : 71
+NIL                  : 
+NOT                  : 75
+NUMBER               : 55
+OBJECT               : 
+OF                   : 
+OPERATOR             : 
+OR                   : 73
+PACKED               : 
+PLUS                 : 67
+PLUSPLUS             : 
+PROCEDURE            : 
+PROGRAM              : 7
+RBLOCK               : 
+RBRACKET             : 
+READLN               : 
+REAL                 : 19
+RECORD               : 
+REINTRODUCE          : 
+REPEAT               : 
+RPAREN               : 30 31 53
+SELF                 : 
+SEMICOLON            : 7 8 12 30 31 32 33 76
+SET                  : 
+SHL                  : 
+SHR                  : 
+STRING               : 
+TEXT                 : 30
+THEN                 : 41 42 43 44 45 46
+TIMES                : 69
+TO                   : 47
+TRUE                 : 
+TYPE                 : 
+UNIT                 : 
+UNTIL                : 
+USES                 : 8
+VAR                  : 11
+WHILE                : 40
+WITH                 : 
+WRITE                : 
+WRITELN              : 30 31 32
+XOR                  : 74
+error                : 
+
+Nonterminals, with rules where they appear
+
+asignation           : 23 27
+asignation_for       : 47 48
+cycles               : 25 29 39
+declaration          : 2 3
+declaration_list     : 1 2
+empty                : 10 14 16 26 50
+expression           : 52 53
+for                  : 38
+header_declaration   : 4
+header_declaration_3 : 8 9
+id_num               : 31 33 34 47 48 57 57 58 59 59 59
+if                   : 37
+instruction          : 22 23 24 25 39 76 76 77 77
+instruction_one_line : 42 44 45 46 46
+internexpression     : 40 41 42 43 44 45 46 49
+op_cycle             : 40 41 42 43 44 45 46 49
+op_logic             : 49
+otherBegin           : 40 43 45 47 48
+otherBegin_if        : 41 43 44
+parentheses          : 51
+procedure_declaration : 6
+program              : 0
+type_cycle           : 35
+type_op              : 54 57
+type_op_math         : 59
+type_specifier       : 12
+var_declaration      : 5
+var_declaration_2    : 11 15
+var_declaration_3    : 12 13
+var_declaration_4    : 12
+while                : 36
+writing              : 24 28
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . declaration_list
+    (2) declaration_list -> . declaration_list declaration
+    (3) declaration_list -> . declaration
+    (4) declaration -> . header_declaration
+    (5) declaration -> . var_declaration
+    (6) declaration -> . procedure_declaration
+    (7) header_declaration -> . PROGRAM ID SEMICOLON
+    (8) header_declaration -> . USES ID header_declaration_3 SEMICOLON
+    (11) var_declaration -> . VAR var_declaration_2
+    (22) procedure_declaration -> . BEGIN instruction END DOT
+
+    PROGRAM         shift and go to state 9
+    USES            shift and go to state 7
+    VAR             shift and go to state 10
+    BEGIN           shift and go to state 2
+
+    header_declaration             shift and go to state 1
+    procedure_declaration          shift and go to state 3
+    declaration_list               shift and go to state 4
+    var_declaration                shift and go to state 5
+    program                        shift and go to state 6
+    declaration                    shift and go to state 8
+
+state 1
+
+    (4) declaration -> header_declaration .
+
+    PROGRAM         reduce using rule 4 (declaration -> header_declaration .)
+    USES            reduce using rule 4 (declaration -> header_declaration .)
+    VAR             reduce using rule 4 (declaration -> header_declaration .)
+    BEGIN           reduce using rule 4 (declaration -> header_declaration .)
+    $end            reduce using rule 4 (declaration -> header_declaration .)
+
+
+state 2
+
+    (22) procedure_declaration -> BEGIN . instruction END DOT
+    (23) instruction -> . asignation instruction
+    (24) instruction -> . writing instruction
+    (25) instruction -> . cycles instruction
+    (26) instruction -> . empty
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (17) empty -> .
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+    asignation                     shift and go to state 21
+    for                            shift and go to state 13
+    instruction                    shift and go to state 20
+    writing                        shift and go to state 14
+    type_cycle                     shift and go to state 22
+    while                          shift and go to state 23
+    cycles                         shift and go to state 24
+    empty                          shift and go to state 15
+    if                             shift and go to state 12
+
+state 3
+
+    (6) declaration -> procedure_declaration .
+
+    PROGRAM         reduce using rule 6 (declaration -> procedure_declaration .)
+    USES            reduce using rule 6 (declaration -> procedure_declaration .)
+    VAR             reduce using rule 6 (declaration -> procedure_declaration .)
+    BEGIN           reduce using rule 6 (declaration -> procedure_declaration .)
+    $end            reduce using rule 6 (declaration -> procedure_declaration .)
+
+
+state 4
+
+    (1) program -> declaration_list .
+    (2) declaration_list -> declaration_list . declaration
+    (4) declaration -> . header_declaration
+    (5) declaration -> . var_declaration
+    (6) declaration -> . procedure_declaration
+    (7) header_declaration -> . PROGRAM ID SEMICOLON
+    (8) header_declaration -> . USES ID header_declaration_3 SEMICOLON
+    (11) var_declaration -> . VAR var_declaration_2
+    (22) procedure_declaration -> . BEGIN instruction END DOT
+
+    $end            reduce using rule 1 (program -> declaration_list .)
+    PROGRAM         shift and go to state 9
+    USES            shift and go to state 7
+    VAR             shift and go to state 10
+    BEGIN           shift and go to state 2
+
+    header_declaration             shift and go to state 1
+    procedure_declaration          shift and go to state 3
+    var_declaration                shift and go to state 5
+    declaration                    shift and go to state 25
+
+state 5
+
+    (5) declaration -> var_declaration .
+
+    PROGRAM         reduce using rule 5 (declaration -> var_declaration .)
+    USES            reduce using rule 5 (declaration -> var_declaration .)
+    VAR             reduce using rule 5 (declaration -> var_declaration .)
+    BEGIN           reduce using rule 5 (declaration -> var_declaration .)
+    $end            reduce using rule 5 (declaration -> var_declaration .)
+
+
+state 6
+
+    (0) S' -> program .
+
+
+
+state 7
+
+    (8) header_declaration -> USES . ID header_declaration_3 SEMICOLON
+
+    ID              shift and go to state 26
+
+
+state 8
+
+    (3) declaration_list -> declaration .
+
+    PROGRAM         reduce using rule 3 (declaration_list -> declaration .)
+    USES            reduce using rule 3 (declaration_list -> declaration .)
+    VAR             reduce using rule 3 (declaration_list -> declaration .)
+    BEGIN           reduce using rule 3 (declaration_list -> declaration .)
+    $end            reduce using rule 3 (declaration_list -> declaration .)
+
+
+state 9
+
+    (7) header_declaration -> PROGRAM . ID SEMICOLON
+
+    ID              shift and go to state 27
+
+
+state 10
+
+    (11) var_declaration -> VAR . var_declaration_2
+    (12) var_declaration_2 -> . ID var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4
+
+    ID              shift and go to state 29
+
+    var_declaration_2              shift and go to state 28
+
+state 11
+
+    (40) while -> WHILE . internexpression op_cycle DO otherBegin
+    (51) internexpression -> . parentheses
+    (52) internexpression -> . expression
+    (53) parentheses -> . LPAREN expression RPAREN
+    (54) expression -> . ID type_op ID
+    (57) expression -> . id_num type_op id_num
+    (58) expression -> . id_num
+    (59) expression -> . id_num type_op_math id_num ISEQUAL id_num
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    LPAREN          shift and go to state 34
+    ID              shift and go to state 36
+    NUMBER          shift and go to state 33
+
+    parentheses                    shift and go to state 30
+    internexpression               shift and go to state 31
+    id_num                         shift and go to state 32
+    expression                     shift and go to state 35
+
+state 12
+
+    (37) type_cycle -> if .
+
+    END             reduce using rule 37 (type_cycle -> if .)
+    ID              reduce using rule 37 (type_cycle -> if .)
+    WRITELN         reduce using rule 37 (type_cycle -> if .)
+    WHILE           reduce using rule 37 (type_cycle -> if .)
+    IF              reduce using rule 37 (type_cycle -> if .)
+    FOR             reduce using rule 37 (type_cycle -> if .)
+    ELSE            reduce using rule 37 (type_cycle -> if .)
+
+
+state 13
+
+    (38) type_cycle -> for .
+
+    END             reduce using rule 38 (type_cycle -> for .)
+    ID              reduce using rule 38 (type_cycle -> for .)
+    WRITELN         reduce using rule 38 (type_cycle -> for .)
+    WHILE           reduce using rule 38 (type_cycle -> for .)
+    IF              reduce using rule 38 (type_cycle -> for .)
+    FOR             reduce using rule 38 (type_cycle -> for .)
+    ELSE            reduce using rule 38 (type_cycle -> for .)
+
+
+state 14
+
+    (24) instruction -> writing . instruction
+    (23) instruction -> . asignation instruction
+    (24) instruction -> . writing instruction
+    (25) instruction -> . cycles instruction
+    (26) instruction -> . empty
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (17) empty -> .
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    END             reduce using rule 17 (empty -> .)
+    ELSE            reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+  ! ID              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! FOR             [ reduce using rule 17 (empty -> .) ]
+
+    for                            shift and go to state 13
+    instruction                    shift and go to state 37
+    asignation                     shift and go to state 21
+    type_cycle                     shift and go to state 22
+    while                          shift and go to state 23
+    writing                        shift and go to state 14
+    cycles                         shift and go to state 24
+    empty                          shift and go to state 15
+    if                             shift and go to state 12
+
+state 15
+
+    (26) instruction -> empty .
+
+    END             reduce using rule 26 (instruction -> empty .)
+    ID              reduce using rule 26 (instruction -> empty .)
+    WRITELN         reduce using rule 26 (instruction -> empty .)
+    WHILE           reduce using rule 26 (instruction -> empty .)
+    IF              reduce using rule 26 (instruction -> empty .)
+    FOR             reduce using rule 26 (instruction -> empty .)
+    ELSE            reduce using rule 26 (instruction -> empty .)
+
+
+state 16
+
+    (47) for -> FOR . asignation_for TO id_num DO otherBegin
+    (48) for -> FOR . asignation_for DOWNTO id_num DO otherBegin
+    (34) asignation_for -> . ID EQUAL id_num
+
+    ID              shift and go to state 39
+
+    asignation_for                 shift and go to state 38
+
+state 17
+
+    (30) writing -> WRITELN . LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> WRITELN . LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> WRITELN . SEMICOLON
+
+    LPAREN          shift and go to state 41
+    SEMICOLON       shift and go to state 40
+
+
+state 18
+
+    (33) asignation -> ID . EQUAL id_num SEMICOLON
+
+    EQUAL           shift and go to state 42
+
+
+state 19
+
+    (41) if -> IF . internexpression op_cycle THEN otherBegin_if
+    (42) if -> IF . internexpression op_cycle THEN instruction_one_line
+    (43) if -> IF . internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> IF . internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> IF . internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> IF . internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (51) internexpression -> . parentheses
+    (52) internexpression -> . expression
+    (53) parentheses -> . LPAREN expression RPAREN
+    (54) expression -> . ID type_op ID
+    (57) expression -> . id_num type_op id_num
+    (58) expression -> . id_num
+    (59) expression -> . id_num type_op_math id_num ISEQUAL id_num
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    LPAREN          shift and go to state 34
+    ID              shift and go to state 36
+    NUMBER          shift and go to state 33
+
+    parentheses                    shift and go to state 30
+    internexpression               shift and go to state 43
+    id_num                         shift and go to state 32
+    expression                     shift and go to state 35
+
+state 20
+
+    (22) procedure_declaration -> BEGIN instruction . END DOT
+
+    END             shift and go to state 44
+
+
+state 21
+
+    (23) instruction -> asignation . instruction
+    (23) instruction -> . asignation instruction
+    (24) instruction -> . writing instruction
+    (25) instruction -> . cycles instruction
+    (26) instruction -> . empty
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (17) empty -> .
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    END             reduce using rule 17 (empty -> .)
+    ELSE            reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+  ! ID              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! FOR             [ reduce using rule 17 (empty -> .) ]
+
+    asignation                     shift and go to state 21
+    for                            shift and go to state 13
+    instruction                    shift and go to state 45
+    writing                        shift and go to state 14
+    type_cycle                     shift and go to state 22
+    while                          shift and go to state 23
+    cycles                         shift and go to state 24
+    empty                          shift and go to state 15
+    if                             shift and go to state 12
+
+state 22
+
+    (35) cycles -> type_cycle .
+
+    END             reduce using rule 35 (cycles -> type_cycle .)
+    ID              reduce using rule 35 (cycles -> type_cycle .)
+    WRITELN         reduce using rule 35 (cycles -> type_cycle .)
+    WHILE           reduce using rule 35 (cycles -> type_cycle .)
+    IF              reduce using rule 35 (cycles -> type_cycle .)
+    FOR             reduce using rule 35 (cycles -> type_cycle .)
+    ELSE            reduce using rule 35 (cycles -> type_cycle .)
+
+
+state 23
+
+    (36) type_cycle -> while .
+
+    END             reduce using rule 36 (type_cycle -> while .)
+    ID              reduce using rule 36 (type_cycle -> while .)
+    WRITELN         reduce using rule 36 (type_cycle -> while .)
+    WHILE           reduce using rule 36 (type_cycle -> while .)
+    IF              reduce using rule 36 (type_cycle -> while .)
+    FOR             reduce using rule 36 (type_cycle -> while .)
+    ELSE            reduce using rule 36 (type_cycle -> while .)
+
+
+state 24
+
+    (25) instruction -> cycles . instruction
+    (39) type_cycle -> cycles . instruction
+    (23) instruction -> . asignation instruction
+    (24) instruction -> . writing instruction
+    (25) instruction -> . cycles instruction
+    (26) instruction -> . empty
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (17) empty -> .
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    END             reduce using rule 17 (empty -> .)
+    ELSE            reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+  ! ID              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! FOR             [ reduce using rule 17 (empty -> .) ]
+
+    asignation                     shift and go to state 21
+    for                            shift and go to state 13
+    instruction                    shift and go to state 46
+    writing                        shift and go to state 14
+    type_cycle                     shift and go to state 22
+    while                          shift and go to state 23
+    cycles                         shift and go to state 24
+    empty                          shift and go to state 15
+    if                             shift and go to state 12
+
+state 25
+
+    (2) declaration_list -> declaration_list declaration .
+
+    PROGRAM         reduce using rule 2 (declaration_list -> declaration_list declaration .)
+    USES            reduce using rule 2 (declaration_list -> declaration_list declaration .)
+    VAR             reduce using rule 2 (declaration_list -> declaration_list declaration .)
+    BEGIN           reduce using rule 2 (declaration_list -> declaration_list declaration .)
+    $end            reduce using rule 2 (declaration_list -> declaration_list declaration .)
+
+
+state 26
+
+    (8) header_declaration -> USES ID . header_declaration_3 SEMICOLON
+    (9) header_declaration_3 -> . COMMA ID header_declaration_3
+    (10) header_declaration_3 -> . empty
+    (17) empty -> .
+
+    COMMA           shift and go to state 47
+    SEMICOLON       reduce using rule 17 (empty -> .)
+
+    header_declaration_3           shift and go to state 48
+    empty                          shift and go to state 49
+
+state 27
+
+    (7) header_declaration -> PROGRAM ID . SEMICOLON
+
+    SEMICOLON       shift and go to state 50
+
+
+state 28
+
+    (11) var_declaration -> VAR var_declaration_2 .
+
+    PROGRAM         reduce using rule 11 (var_declaration -> VAR var_declaration_2 .)
+    USES            reduce using rule 11 (var_declaration -> VAR var_declaration_2 .)
+    VAR             reduce using rule 11 (var_declaration -> VAR var_declaration_2 .)
+    BEGIN           reduce using rule 11 (var_declaration -> VAR var_declaration_2 .)
+    $end            reduce using rule 11 (var_declaration -> VAR var_declaration_2 .)
+
+
+state 29
+
+    (12) var_declaration_2 -> ID . var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4
+    (13) var_declaration_3 -> . COMMA ID var_declaration_3
+    (14) var_declaration_3 -> . empty
+    (17) empty -> .
+
+    COMMA           shift and go to state 52
+    COLON           reduce using rule 17 (empty -> .)
+
+    var_declaration_3              shift and go to state 51
+    empty                          shift and go to state 53
+
+state 30
+
+    (51) internexpression -> parentheses .
+
+    AND             reduce using rule 51 (internexpression -> parentheses .)
+    OR              reduce using rule 51 (internexpression -> parentheses .)
+    XOR             reduce using rule 51 (internexpression -> parentheses .)
+    NOT             reduce using rule 51 (internexpression -> parentheses .)
+    DO              reduce using rule 51 (internexpression -> parentheses .)
+    THEN            reduce using rule 51 (internexpression -> parentheses .)
+
+
+state 31
+
+    (40) while -> WHILE internexpression . op_cycle DO otherBegin
+    (49) op_cycle -> . op_logic internexpression op_cycle
+    (50) op_cycle -> . empty
+    (72) op_logic -> . AND
+    (73) op_logic -> . OR
+    (74) op_logic -> . XOR
+    (75) op_logic -> . NOT
+    (17) empty -> .
+
+    AND             shift and go to state 54
+    OR              shift and go to state 59
+    XOR             shift and go to state 55
+    NOT             shift and go to state 57
+    DO              reduce using rule 17 (empty -> .)
+
+    empty                          shift and go to state 60
+    op_cycle                       shift and go to state 58
+    op_logic                       shift and go to state 56
+
+state 32
+
+    (57) expression -> id_num . type_op id_num
+    (58) expression -> id_num .
+    (59) expression -> id_num . type_op_math id_num ISEQUAL id_num
+    (60) type_op -> . LESSEQUAL
+    (61) type_op -> . LESS
+    (62) type_op -> . GREATER
+    (63) type_op -> . GREATEREQUAL
+    (64) type_op -> . ISEQUAL
+    (65) type_op -> . DEQUAL
+    (66) type_op -> . DISTINT
+    (67) type_op_math -> . PLUS
+    (68) type_op_math -> . MINUS
+    (69) type_op_math -> . TIMES
+    (70) type_op_math -> . DIVIDE
+    (71) type_op_math -> . MOD
+
+    AND             reduce using rule 58 (expression -> id_num .)
+    OR              reduce using rule 58 (expression -> id_num .)
+    XOR             reduce using rule 58 (expression -> id_num .)
+    NOT             reduce using rule 58 (expression -> id_num .)
+    THEN            reduce using rule 58 (expression -> id_num .)
+    DO              reduce using rule 58 (expression -> id_num .)
+    RPAREN          reduce using rule 58 (expression -> id_num .)
+    LESSEQUAL       shift and go to state 71
+    LESS            shift and go to state 63
+    GREATER         shift and go to state 62
+    GREATEREQUAL    shift and go to state 61
+    ISEQUAL         shift and go to state 70
+    DEQUAL          shift and go to state 65
+    DISTINT         shift and go to state 73
+    PLUS            shift and go to state 68
+    MINUS           shift and go to state 67
+    TIMES           shift and go to state 72
+    DIVIDE          shift and go to state 74
+    MOD             shift and go to state 69
+
+    type_op                        shift and go to state 64
+    type_op_math                   shift and go to state 66
+
+state 33
+
+    (55) id_num -> NUMBER .
+
+    AND             reduce using rule 55 (id_num -> NUMBER .)
+    OR              reduce using rule 55 (id_num -> NUMBER .)
+    XOR             reduce using rule 55 (id_num -> NUMBER .)
+    NOT             reduce using rule 55 (id_num -> NUMBER .)
+    DO              reduce using rule 55 (id_num -> NUMBER .)
+    THEN            reduce using rule 55 (id_num -> NUMBER .)
+    RPAREN          reduce using rule 55 (id_num -> NUMBER .)
+    LESSEQUAL       reduce using rule 55 (id_num -> NUMBER .)
+    LESS            reduce using rule 55 (id_num -> NUMBER .)
+    GREATER         reduce using rule 55 (id_num -> NUMBER .)
+    GREATEREQUAL    reduce using rule 55 (id_num -> NUMBER .)
+    ISEQUAL         reduce using rule 55 (id_num -> NUMBER .)
+    DEQUAL          reduce using rule 55 (id_num -> NUMBER .)
+    DISTINT         reduce using rule 55 (id_num -> NUMBER .)
+    PLUS            reduce using rule 55 (id_num -> NUMBER .)
+    MINUS           reduce using rule 55 (id_num -> NUMBER .)
+    TIMES           reduce using rule 55 (id_num -> NUMBER .)
+    DIVIDE          reduce using rule 55 (id_num -> NUMBER .)
+    MOD             reduce using rule 55 (id_num -> NUMBER .)
+    TO              reduce using rule 55 (id_num -> NUMBER .)
+    DOWNTO          reduce using rule 55 (id_num -> NUMBER .)
+    SEMICOLON       reduce using rule 55 (id_num -> NUMBER .)
+
+
+state 34
+
+    (53) parentheses -> LPAREN . expression RPAREN
+    (54) expression -> . ID type_op ID
+    (57) expression -> . id_num type_op id_num
+    (58) expression -> . id_num
+    (59) expression -> . id_num type_op_math id_num ISEQUAL id_num
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    ID              shift and go to state 36
+    NUMBER          shift and go to state 33
+
+    id_num                         shift and go to state 32
+    expression                     shift and go to state 75
+
+state 35
+
+    (52) internexpression -> expression .
+
+    AND             reduce using rule 52 (internexpression -> expression .)
+    OR              reduce using rule 52 (internexpression -> expression .)
+    XOR             reduce using rule 52 (internexpression -> expression .)
+    NOT             reduce using rule 52 (internexpression -> expression .)
+    DO              reduce using rule 52 (internexpression -> expression .)
+    THEN            reduce using rule 52 (internexpression -> expression .)
+
+
+state 36
+
+    (54) expression -> ID . type_op ID
+    (56) id_num -> ID .
+    (60) type_op -> . LESSEQUAL
+    (61) type_op -> . LESS
+    (62) type_op -> . GREATER
+    (63) type_op -> . GREATEREQUAL
+    (64) type_op -> . ISEQUAL
+    (65) type_op -> . DEQUAL
+    (66) type_op -> . DISTINT
+
+  ! shift/reduce conflict for LESSEQUAL resolved as shift
+  ! shift/reduce conflict for LESS resolved as shift
+  ! shift/reduce conflict for GREATER resolved as shift
+  ! shift/reduce conflict for GREATEREQUAL resolved as shift
+  ! shift/reduce conflict for ISEQUAL resolved as shift
+  ! shift/reduce conflict for DEQUAL resolved as shift
+  ! shift/reduce conflict for DISTINT resolved as shift
+    PLUS            reduce using rule 56 (id_num -> ID .)
+    MINUS           reduce using rule 56 (id_num -> ID .)
+    TIMES           reduce using rule 56 (id_num -> ID .)
+    DIVIDE          reduce using rule 56 (id_num -> ID .)
+    MOD             reduce using rule 56 (id_num -> ID .)
+    RPAREN          reduce using rule 56 (id_num -> ID .)
+    AND             reduce using rule 56 (id_num -> ID .)
+    OR              reduce using rule 56 (id_num -> ID .)
+    XOR             reduce using rule 56 (id_num -> ID .)
+    NOT             reduce using rule 56 (id_num -> ID .)
+    THEN            reduce using rule 56 (id_num -> ID .)
+    DO              reduce using rule 56 (id_num -> ID .)
+    LESSEQUAL       shift and go to state 71
+    LESS            shift and go to state 63
+    GREATER         shift and go to state 62
+    GREATEREQUAL    shift and go to state 61
+    ISEQUAL         shift and go to state 70
+    DEQUAL          shift and go to state 65
+    DISTINT         shift and go to state 73
+
+  ! LESSEQUAL       [ reduce using rule 56 (id_num -> ID .) ]
+  ! LESS            [ reduce using rule 56 (id_num -> ID .) ]
+  ! GREATER         [ reduce using rule 56 (id_num -> ID .) ]
+  ! GREATEREQUAL    [ reduce using rule 56 (id_num -> ID .) ]
+  ! ISEQUAL         [ reduce using rule 56 (id_num -> ID .) ]
+  ! DEQUAL          [ reduce using rule 56 (id_num -> ID .) ]
+  ! DISTINT         [ reduce using rule 56 (id_num -> ID .) ]
+
+    type_op                        shift and go to state 76
+
+state 37
+
+    (24) instruction -> writing instruction .
+
+    END             reduce using rule 24 (instruction -> writing instruction .)
+    ID              reduce using rule 24 (instruction -> writing instruction .)
+    WRITELN         reduce using rule 24 (instruction -> writing instruction .)
+    WHILE           reduce using rule 24 (instruction -> writing instruction .)
+    IF              reduce using rule 24 (instruction -> writing instruction .)
+    FOR             reduce using rule 24 (instruction -> writing instruction .)
+    ELSE            reduce using rule 24 (instruction -> writing instruction .)
+
+
+state 38
+
+    (47) for -> FOR asignation_for . TO id_num DO otherBegin
+    (48) for -> FOR asignation_for . DOWNTO id_num DO otherBegin
+
+    TO              shift and go to state 78
+    DOWNTO          shift and go to state 77
+
+
+state 39
+
+    (34) asignation_for -> ID . EQUAL id_num
+
+    EQUAL           shift and go to state 79
+
+
+state 40
+
+    (32) writing -> WRITELN SEMICOLON .
+
+    ID              reduce using rule 32 (writing -> WRITELN SEMICOLON .)
+    WRITELN         reduce using rule 32 (writing -> WRITELN SEMICOLON .)
+    WHILE           reduce using rule 32 (writing -> WRITELN SEMICOLON .)
+    IF              reduce using rule 32 (writing -> WRITELN SEMICOLON .)
+    FOR             reduce using rule 32 (writing -> WRITELN SEMICOLON .)
+    END             reduce using rule 32 (writing -> WRITELN SEMICOLON .)
+    ELSE            reduce using rule 32 (writing -> WRITELN SEMICOLON .)
+
+
+state 41
+
+    (30) writing -> WRITELN LPAREN . TEXT RPAREN SEMICOLON
+    (31) writing -> WRITELN LPAREN . id_num RPAREN SEMICOLON
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    TEXT            shift and go to state 80
+    NUMBER          shift and go to state 33
+    ID              shift and go to state 82
+
+    id_num                         shift and go to state 81
+
+state 42
+
+    (33) asignation -> ID EQUAL . id_num SEMICOLON
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    NUMBER          shift and go to state 33
+    ID              shift and go to state 82
+
+    id_num                         shift and go to state 83
+
+state 43
+
+    (41) if -> IF internexpression . op_cycle THEN otherBegin_if
+    (42) if -> IF internexpression . op_cycle THEN instruction_one_line
+    (43) if -> IF internexpression . op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> IF internexpression . op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> IF internexpression . op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> IF internexpression . op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (49) op_cycle -> . op_logic internexpression op_cycle
+    (50) op_cycle -> . empty
+    (72) op_logic -> . AND
+    (73) op_logic -> . OR
+    (74) op_logic -> . XOR
+    (75) op_logic -> . NOT
+    (17) empty -> .
+
+    AND             shift and go to state 54
+    OR              shift and go to state 59
+    XOR             shift and go to state 55
+    NOT             shift and go to state 57
+    THEN            reduce using rule 17 (empty -> .)
+
+    op_logic                       shift and go to state 56
+    op_cycle                       shift and go to state 84
+    empty                          shift and go to state 60
+
+state 44
+
+    (22) procedure_declaration -> BEGIN instruction END . DOT
+
+    DOT             shift and go to state 85
+
+
+state 45
+
+    (23) instruction -> asignation instruction .
+
+    END             reduce using rule 23 (instruction -> asignation instruction .)
+    ID              reduce using rule 23 (instruction -> asignation instruction .)
+    WRITELN         reduce using rule 23 (instruction -> asignation instruction .)
+    WHILE           reduce using rule 23 (instruction -> asignation instruction .)
+    IF              reduce using rule 23 (instruction -> asignation instruction .)
+    FOR             reduce using rule 23 (instruction -> asignation instruction .)
+    ELSE            reduce using rule 23 (instruction -> asignation instruction .)
+
+
+state 46
+
+    (25) instruction -> cycles instruction .
+    (39) type_cycle -> cycles instruction .
+
+  ! reduce/reduce conflict for END resolved using rule 25 (instruction -> cycles instruction .)
+  ! reduce/reduce conflict for ID resolved using rule 25 (instruction -> cycles instruction .)
+  ! reduce/reduce conflict for WRITELN resolved using rule 25 (instruction -> cycles instruction .)
+  ! reduce/reduce conflict for WHILE resolved using rule 25 (instruction -> cycles instruction .)
+  ! reduce/reduce conflict for IF resolved using rule 25 (instruction -> cycles instruction .)
+  ! reduce/reduce conflict for FOR resolved using rule 25 (instruction -> cycles instruction .)
+  ! reduce/reduce conflict for ELSE resolved using rule 25 (instruction -> cycles instruction .)
+    END             reduce using rule 25 (instruction -> cycles instruction .)
+    ID              reduce using rule 25 (instruction -> cycles instruction .)
+    WRITELN         reduce using rule 25 (instruction -> cycles instruction .)
+    WHILE           reduce using rule 25 (instruction -> cycles instruction .)
+    IF              reduce using rule 25 (instruction -> cycles instruction .)
+    FOR             reduce using rule 25 (instruction -> cycles instruction .)
+    ELSE            reduce using rule 25 (instruction -> cycles instruction .)
+
+  ! END             [ reduce using rule 39 (type_cycle -> cycles instruction .) ]
+  ! ID              [ reduce using rule 39 (type_cycle -> cycles instruction .) ]
+  ! WRITELN         [ reduce using rule 39 (type_cycle -> cycles instruction .) ]
+  ! WHILE           [ reduce using rule 39 (type_cycle -> cycles instruction .) ]
+  ! IF              [ reduce using rule 39 (type_cycle -> cycles instruction .) ]
+  ! FOR             [ reduce using rule 39 (type_cycle -> cycles instruction .) ]
+  ! ELSE            [ reduce using rule 39 (type_cycle -> cycles instruction .) ]
+
+
+state 47
+
+    (9) header_declaration_3 -> COMMA . ID header_declaration_3
+
+    ID              shift and go to state 86
+
+
+state 48
+
+    (8) header_declaration -> USES ID header_declaration_3 . SEMICOLON
+
+    SEMICOLON       shift and go to state 87
+
+
+state 49
+
+    (10) header_declaration_3 -> empty .
+
+    SEMICOLON       reduce using rule 10 (header_declaration_3 -> empty .)
+
+
+state 50
+
+    (7) header_declaration -> PROGRAM ID SEMICOLON .
+
+    PROGRAM         reduce using rule 7 (header_declaration -> PROGRAM ID SEMICOLON .)
+    USES            reduce using rule 7 (header_declaration -> PROGRAM ID SEMICOLON .)
+    VAR             reduce using rule 7 (header_declaration -> PROGRAM ID SEMICOLON .)
+    BEGIN           reduce using rule 7 (header_declaration -> PROGRAM ID SEMICOLON .)
+    $end            reduce using rule 7 (header_declaration -> PROGRAM ID SEMICOLON .)
+
+
+state 51
+
+    (12) var_declaration_2 -> ID var_declaration_3 . COLON type_specifier SEMICOLON var_declaration_4
+
+    COLON           shift and go to state 88
+
+
+state 52
+
+    (13) var_declaration_3 -> COMMA . ID var_declaration_3
+
+    ID              shift and go to state 89
+
+
+state 53
+
+    (14) var_declaration_3 -> empty .
+
+    COLON           reduce using rule 14 (var_declaration_3 -> empty .)
+
+
+state 54
+
+    (72) op_logic -> AND .
+
+    LPAREN          reduce using rule 72 (op_logic -> AND .)
+    ID              reduce using rule 72 (op_logic -> AND .)
+    NUMBER          reduce using rule 72 (op_logic -> AND .)
+
+
+state 55
+
+    (74) op_logic -> XOR .
+
+    LPAREN          reduce using rule 74 (op_logic -> XOR .)
+    ID              reduce using rule 74 (op_logic -> XOR .)
+    NUMBER          reduce using rule 74 (op_logic -> XOR .)
+
+
+state 56
+
+    (49) op_cycle -> op_logic . internexpression op_cycle
+    (51) internexpression -> . parentheses
+    (52) internexpression -> . expression
+    (53) parentheses -> . LPAREN expression RPAREN
+    (54) expression -> . ID type_op ID
+    (57) expression -> . id_num type_op id_num
+    (58) expression -> . id_num
+    (59) expression -> . id_num type_op_math id_num ISEQUAL id_num
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    LPAREN          shift and go to state 34
+    ID              shift and go to state 36
+    NUMBER          shift and go to state 33
+
+    parentheses                    shift and go to state 30
+    internexpression               shift and go to state 90
+    id_num                         shift and go to state 32
+    expression                     shift and go to state 35
+
+state 57
+
+    (75) op_logic -> NOT .
+
+    LPAREN          reduce using rule 75 (op_logic -> NOT .)
+    ID              reduce using rule 75 (op_logic -> NOT .)
+    NUMBER          reduce using rule 75 (op_logic -> NOT .)
+
+
+state 58
+
+    (40) while -> WHILE internexpression op_cycle . DO otherBegin
+
+    DO              shift and go to state 91
+
+
+state 59
+
+    (73) op_logic -> OR .
+
+    LPAREN          reduce using rule 73 (op_logic -> OR .)
+    ID              reduce using rule 73 (op_logic -> OR .)
+    NUMBER          reduce using rule 73 (op_logic -> OR .)
+
+
+state 60
+
+    (50) op_cycle -> empty .
+
+    THEN            reduce using rule 50 (op_cycle -> empty .)
+    DO              reduce using rule 50 (op_cycle -> empty .)
+
+
+state 61
+
+    (63) type_op -> GREATEREQUAL .
+
+    NUMBER          reduce using rule 63 (type_op -> GREATEREQUAL .)
+    ID              reduce using rule 63 (type_op -> GREATEREQUAL .)
+
+
+state 62
+
+    (62) type_op -> GREATER .
+
+    NUMBER          reduce using rule 62 (type_op -> GREATER .)
+    ID              reduce using rule 62 (type_op -> GREATER .)
+
+
+state 63
+
+    (61) type_op -> LESS .
+
+    NUMBER          reduce using rule 61 (type_op -> LESS .)
+    ID              reduce using rule 61 (type_op -> LESS .)
+
+
+state 64
+
+    (57) expression -> id_num type_op . id_num
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    NUMBER          shift and go to state 33
+    ID              shift and go to state 82
+
+    id_num                         shift and go to state 92
+
+state 65
+
+    (65) type_op -> DEQUAL .
+
+    NUMBER          reduce using rule 65 (type_op -> DEQUAL .)
+    ID              reduce using rule 65 (type_op -> DEQUAL .)
+
+
+state 66
+
+    (59) expression -> id_num type_op_math . id_num ISEQUAL id_num
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    NUMBER          shift and go to state 33
+    ID              shift and go to state 82
+
+    id_num                         shift and go to state 93
+
+state 67
+
+    (68) type_op_math -> MINUS .
+
+    NUMBER          reduce using rule 68 (type_op_math -> MINUS .)
+    ID              reduce using rule 68 (type_op_math -> MINUS .)
+
+
+state 68
+
+    (67) type_op_math -> PLUS .
+
+    NUMBER          reduce using rule 67 (type_op_math -> PLUS .)
+    ID              reduce using rule 67 (type_op_math -> PLUS .)
+
+
+state 69
+
+    (71) type_op_math -> MOD .
+
+    NUMBER          reduce using rule 71 (type_op_math -> MOD .)
+    ID              reduce using rule 71 (type_op_math -> MOD .)
+
+
+state 70
+
+    (64) type_op -> ISEQUAL .
+
+    NUMBER          reduce using rule 64 (type_op -> ISEQUAL .)
+    ID              reduce using rule 64 (type_op -> ISEQUAL .)
+
+
+state 71
+
+    (60) type_op -> LESSEQUAL .
+
+    NUMBER          reduce using rule 60 (type_op -> LESSEQUAL .)
+    ID              reduce using rule 60 (type_op -> LESSEQUAL .)
+
+
+state 72
+
+    (69) type_op_math -> TIMES .
+
+    NUMBER          reduce using rule 69 (type_op_math -> TIMES .)
+    ID              reduce using rule 69 (type_op_math -> TIMES .)
+
+
+state 73
+
+    (66) type_op -> DISTINT .
+
+    NUMBER          reduce using rule 66 (type_op -> DISTINT .)
+    ID              reduce using rule 66 (type_op -> DISTINT .)
+
+
+state 74
+
+    (70) type_op_math -> DIVIDE .
+
+    NUMBER          reduce using rule 70 (type_op_math -> DIVIDE .)
+    ID              reduce using rule 70 (type_op_math -> DIVIDE .)
+
+
+state 75
+
+    (53) parentheses -> LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 94
+
+
+state 76
+
+    (54) expression -> ID type_op . ID
+
+    ID              shift and go to state 95
+
+
+state 77
+
+    (48) for -> FOR asignation_for DOWNTO . id_num DO otherBegin
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    NUMBER          shift and go to state 33
+    ID              shift and go to state 82
+
+    id_num                         shift and go to state 96
+
+state 78
+
+    (47) for -> FOR asignation_for TO . id_num DO otherBegin
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    NUMBER          shift and go to state 33
+    ID              shift and go to state 82
+
+    id_num                         shift and go to state 97
+
+state 79
+
+    (34) asignation_for -> ID EQUAL . id_num
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    NUMBER          shift and go to state 33
+    ID              shift and go to state 82
+
+    id_num                         shift and go to state 98
+
+state 80
+
+    (30) writing -> WRITELN LPAREN TEXT . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 99
+
+
+state 81
+
+    (31) writing -> WRITELN LPAREN id_num . RPAREN SEMICOLON
+
+    RPAREN          shift and go to state 100
+
+
+state 82
+
+    (56) id_num -> ID .
+
+    AND             reduce using rule 56 (id_num -> ID .)
+    OR              reduce using rule 56 (id_num -> ID .)
+    XOR             reduce using rule 56 (id_num -> ID .)
+    NOT             reduce using rule 56 (id_num -> ID .)
+    DO              reduce using rule 56 (id_num -> ID .)
+    THEN            reduce using rule 56 (id_num -> ID .)
+    RPAREN          reduce using rule 56 (id_num -> ID .)
+    ISEQUAL         reduce using rule 56 (id_num -> ID .)
+    TO              reduce using rule 56 (id_num -> ID .)
+    DOWNTO          reduce using rule 56 (id_num -> ID .)
+    SEMICOLON       reduce using rule 56 (id_num -> ID .)
+
+
+state 83
+
+    (33) asignation -> ID EQUAL id_num . SEMICOLON
+
+    SEMICOLON       shift and go to state 101
+
+
+state 84
+
+    (41) if -> IF internexpression op_cycle . THEN otherBegin_if
+    (42) if -> IF internexpression op_cycle . THEN instruction_one_line
+    (43) if -> IF internexpression op_cycle . THEN otherBegin_if ELSE otherBegin
+    (44) if -> IF internexpression op_cycle . THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> IF internexpression op_cycle . THEN instruction_one_line ELSE otherBegin
+    (46) if -> IF internexpression op_cycle . THEN instruction_one_line ELSE instruction_one_line
+
+    THEN            shift and go to state 102
+
+
+state 85
+
+    (22) procedure_declaration -> BEGIN instruction END DOT .
+
+    PROGRAM         reduce using rule 22 (procedure_declaration -> BEGIN instruction END DOT .)
+    USES            reduce using rule 22 (procedure_declaration -> BEGIN instruction END DOT .)
+    VAR             reduce using rule 22 (procedure_declaration -> BEGIN instruction END DOT .)
+    BEGIN           reduce using rule 22 (procedure_declaration -> BEGIN instruction END DOT .)
+    $end            reduce using rule 22 (procedure_declaration -> BEGIN instruction END DOT .)
+
+
+state 86
+
+    (9) header_declaration_3 -> COMMA ID . header_declaration_3
+    (9) header_declaration_3 -> . COMMA ID header_declaration_3
+    (10) header_declaration_3 -> . empty
+    (17) empty -> .
+
+    COMMA           shift and go to state 47
+    SEMICOLON       reduce using rule 17 (empty -> .)
+
+    header_declaration_3           shift and go to state 103
+    empty                          shift and go to state 49
+
+state 87
+
+    (8) header_declaration -> USES ID header_declaration_3 SEMICOLON .
+
+    PROGRAM         reduce using rule 8 (header_declaration -> USES ID header_declaration_3 SEMICOLON .)
+    USES            reduce using rule 8 (header_declaration -> USES ID header_declaration_3 SEMICOLON .)
+    VAR             reduce using rule 8 (header_declaration -> USES ID header_declaration_3 SEMICOLON .)
+    BEGIN           reduce using rule 8 (header_declaration -> USES ID header_declaration_3 SEMICOLON .)
+    $end            reduce using rule 8 (header_declaration -> USES ID header_declaration_3 SEMICOLON .)
+
+
+state 88
+
+    (12) var_declaration_2 -> ID var_declaration_3 COLON . type_specifier SEMICOLON var_declaration_4
+    (18) type_specifier -> . INTEGER
+    (19) type_specifier -> . REAL
+    (20) type_specifier -> . CHAR
+    (21) type_specifier -> . BOOLEAN
+
+    INTEGER         shift and go to state 108
+    REAL            shift and go to state 104
+    CHAR            shift and go to state 106
+    BOOLEAN         shift and go to state 107
+
+    type_specifier                 shift and go to state 105
+
+state 89
+
+    (13) var_declaration_3 -> COMMA ID . var_declaration_3
+    (13) var_declaration_3 -> . COMMA ID var_declaration_3
+    (14) var_declaration_3 -> . empty
+    (17) empty -> .
+
+    COMMA           shift and go to state 52
+    COLON           reduce using rule 17 (empty -> .)
+
+    var_declaration_3              shift and go to state 109
+    empty                          shift and go to state 53
+
+state 90
+
+    (49) op_cycle -> op_logic internexpression . op_cycle
+    (49) op_cycle -> . op_logic internexpression op_cycle
+    (50) op_cycle -> . empty
+    (72) op_logic -> . AND
+    (73) op_logic -> . OR
+    (74) op_logic -> . XOR
+    (75) op_logic -> . NOT
+    (17) empty -> .
+
+    AND             shift and go to state 54
+    OR              shift and go to state 59
+    XOR             shift and go to state 55
+    NOT             shift and go to state 57
+    DO              reduce using rule 17 (empty -> .)
+    THEN            reduce using rule 17 (empty -> .)
+
+    op_logic                       shift and go to state 56
+    op_cycle                       shift and go to state 110
+    empty                          shift and go to state 60
+
+state 91
+
+    (40) while -> WHILE internexpression op_cycle DO . otherBegin
+    (76) otherBegin -> . BEGIN instruction END SEMICOLON instruction
+
+    BEGIN           shift and go to state 111
+
+    otherBegin                     shift and go to state 112
+
+state 92
+
+    (57) expression -> id_num type_op id_num .
+
+    AND             reduce using rule 57 (expression -> id_num type_op id_num .)
+    OR              reduce using rule 57 (expression -> id_num type_op id_num .)
+    XOR             reduce using rule 57 (expression -> id_num type_op id_num .)
+    NOT             reduce using rule 57 (expression -> id_num type_op id_num .)
+    THEN            reduce using rule 57 (expression -> id_num type_op id_num .)
+    DO              reduce using rule 57 (expression -> id_num type_op id_num .)
+    RPAREN          reduce using rule 57 (expression -> id_num type_op id_num .)
+
+
+state 93
+
+    (59) expression -> id_num type_op_math id_num . ISEQUAL id_num
+
+    ISEQUAL         shift and go to state 113
+
+
+state 94
+
+    (53) parentheses -> LPAREN expression RPAREN .
+
+    AND             reduce using rule 53 (parentheses -> LPAREN expression RPAREN .)
+    OR              reduce using rule 53 (parentheses -> LPAREN expression RPAREN .)
+    XOR             reduce using rule 53 (parentheses -> LPAREN expression RPAREN .)
+    NOT             reduce using rule 53 (parentheses -> LPAREN expression RPAREN .)
+    DO              reduce using rule 53 (parentheses -> LPAREN expression RPAREN .)
+    THEN            reduce using rule 53 (parentheses -> LPAREN expression RPAREN .)
+
+
+state 95
+
+    (54) expression -> ID type_op ID .
+
+    AND             reduce using rule 54 (expression -> ID type_op ID .)
+    OR              reduce using rule 54 (expression -> ID type_op ID .)
+    XOR             reduce using rule 54 (expression -> ID type_op ID .)
+    NOT             reduce using rule 54 (expression -> ID type_op ID .)
+    THEN            reduce using rule 54 (expression -> ID type_op ID .)
+    DO              reduce using rule 54 (expression -> ID type_op ID .)
+    RPAREN          reduce using rule 54 (expression -> ID type_op ID .)
+
+
+state 96
+
+    (48) for -> FOR asignation_for DOWNTO id_num . DO otherBegin
+
+    DO              shift and go to state 114
+
+
+state 97
+
+    (47) for -> FOR asignation_for TO id_num . DO otherBegin
+
+    DO              shift and go to state 115
+
+
+state 98
+
+    (34) asignation_for -> ID EQUAL id_num .
+
+    TO              reduce using rule 34 (asignation_for -> ID EQUAL id_num .)
+    DOWNTO          reduce using rule 34 (asignation_for -> ID EQUAL id_num .)
+
+
+state 99
+
+    (30) writing -> WRITELN LPAREN TEXT RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 116
+
+
+state 100
+
+    (31) writing -> WRITELN LPAREN id_num RPAREN . SEMICOLON
+
+    SEMICOLON       shift and go to state 117
+
+
+state 101
+
+    (33) asignation -> ID EQUAL id_num SEMICOLON .
+
+    END             reduce using rule 33 (asignation -> ID EQUAL id_num SEMICOLON .)
+    ID              reduce using rule 33 (asignation -> ID EQUAL id_num SEMICOLON .)
+    WRITELN         reduce using rule 33 (asignation -> ID EQUAL id_num SEMICOLON .)
+    WHILE           reduce using rule 33 (asignation -> ID EQUAL id_num SEMICOLON .)
+    IF              reduce using rule 33 (asignation -> ID EQUAL id_num SEMICOLON .)
+    FOR             reduce using rule 33 (asignation -> ID EQUAL id_num SEMICOLON .)
+    ELSE            reduce using rule 33 (asignation -> ID EQUAL id_num SEMICOLON .)
+
+
+state 102
+
+    (41) if -> IF internexpression op_cycle THEN . otherBegin_if
+    (42) if -> IF internexpression op_cycle THEN . instruction_one_line
+    (43) if -> IF internexpression op_cycle THEN . otherBegin_if ELSE otherBegin
+    (44) if -> IF internexpression op_cycle THEN . otherBegin_if ELSE instruction_one_line
+    (45) if -> IF internexpression op_cycle THEN . instruction_one_line ELSE otherBegin
+    (46) if -> IF internexpression op_cycle THEN . instruction_one_line ELSE instruction_one_line
+    (77) otherBegin_if -> . BEGIN instruction END instruction
+    (27) instruction_one_line -> . asignation
+    (28) instruction_one_line -> . writing
+    (29) instruction_one_line -> . cycles
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+    BEGIN           shift and go to state 118
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+    cycles                         shift and go to state 123
+    for                            shift and go to state 13
+    while                          shift and go to state 23
+    asignation                     shift and go to state 121
+    type_cycle                     shift and go to state 22
+    instruction_one_line           shift and go to state 120
+    otherBegin_if                  shift and go to state 122
+    writing                        shift and go to state 119
+    if                             shift and go to state 12
+
+state 103
+
+    (9) header_declaration_3 -> COMMA ID header_declaration_3 .
+
+    SEMICOLON       reduce using rule 9 (header_declaration_3 -> COMMA ID header_declaration_3 .)
+
+
+state 104
+
+    (19) type_specifier -> REAL .
+
+    SEMICOLON       reduce using rule 19 (type_specifier -> REAL .)
+
+
+state 105
+
+    (12) var_declaration_2 -> ID var_declaration_3 COLON type_specifier . SEMICOLON var_declaration_4
+
+    SEMICOLON       shift and go to state 124
+
+
+state 106
+
+    (20) type_specifier -> CHAR .
+
+    SEMICOLON       reduce using rule 20 (type_specifier -> CHAR .)
+
+
+state 107
+
+    (21) type_specifier -> BOOLEAN .
+
+    SEMICOLON       reduce using rule 21 (type_specifier -> BOOLEAN .)
+
+
+state 108
+
+    (18) type_specifier -> INTEGER .
+
+    SEMICOLON       reduce using rule 18 (type_specifier -> INTEGER .)
+
+
+state 109
+
+    (13) var_declaration_3 -> COMMA ID var_declaration_3 .
+
+    COLON           reduce using rule 13 (var_declaration_3 -> COMMA ID var_declaration_3 .)
+
+
+state 110
+
+    (49) op_cycle -> op_logic internexpression op_cycle .
+
+    THEN            reduce using rule 49 (op_cycle -> op_logic internexpression op_cycle .)
+    DO              reduce using rule 49 (op_cycle -> op_logic internexpression op_cycle .)
+
+
+state 111
+
+    (76) otherBegin -> BEGIN . instruction END SEMICOLON instruction
+    (23) instruction -> . asignation instruction
+    (24) instruction -> . writing instruction
+    (25) instruction -> . cycles instruction
+    (26) instruction -> . empty
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (17) empty -> .
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+    asignation                     shift and go to state 21
+    for                            shift and go to state 13
+    instruction                    shift and go to state 125
+    writing                        shift and go to state 14
+    type_cycle                     shift and go to state 22
+    while                          shift and go to state 23
+    cycles                         shift and go to state 24
+    empty                          shift and go to state 15
+    if                             shift and go to state 12
+
+state 112
+
+    (40) while -> WHILE internexpression op_cycle DO otherBegin .
+
+    END             reduce using rule 40 (while -> WHILE internexpression op_cycle DO otherBegin .)
+    ID              reduce using rule 40 (while -> WHILE internexpression op_cycle DO otherBegin .)
+    WRITELN         reduce using rule 40 (while -> WHILE internexpression op_cycle DO otherBegin .)
+    WHILE           reduce using rule 40 (while -> WHILE internexpression op_cycle DO otherBegin .)
+    IF              reduce using rule 40 (while -> WHILE internexpression op_cycle DO otherBegin .)
+    FOR             reduce using rule 40 (while -> WHILE internexpression op_cycle DO otherBegin .)
+    ELSE            reduce using rule 40 (while -> WHILE internexpression op_cycle DO otherBegin .)
+
+
+state 113
+
+    (59) expression -> id_num type_op_math id_num ISEQUAL . id_num
+    (55) id_num -> . NUMBER
+    (56) id_num -> . ID
+
+    NUMBER          shift and go to state 33
+    ID              shift and go to state 82
+
+    id_num                         shift and go to state 126
+
+state 114
+
+    (48) for -> FOR asignation_for DOWNTO id_num DO . otherBegin
+    (76) otherBegin -> . BEGIN instruction END SEMICOLON instruction
+
+    BEGIN           shift and go to state 111
+
+    otherBegin                     shift and go to state 127
+
+state 115
+
+    (47) for -> FOR asignation_for TO id_num DO . otherBegin
+    (76) otherBegin -> . BEGIN instruction END SEMICOLON instruction
+
+    BEGIN           shift and go to state 111
+
+    otherBegin                     shift and go to state 128
+
+state 116
+
+    (30) writing -> WRITELN LPAREN TEXT RPAREN SEMICOLON .
+
+    ID              reduce using rule 30 (writing -> WRITELN LPAREN TEXT RPAREN SEMICOLON .)
+    WRITELN         reduce using rule 30 (writing -> WRITELN LPAREN TEXT RPAREN SEMICOLON .)
+    WHILE           reduce using rule 30 (writing -> WRITELN LPAREN TEXT RPAREN SEMICOLON .)
+    IF              reduce using rule 30 (writing -> WRITELN LPAREN TEXT RPAREN SEMICOLON .)
+    FOR             reduce using rule 30 (writing -> WRITELN LPAREN TEXT RPAREN SEMICOLON .)
+    END             reduce using rule 30 (writing -> WRITELN LPAREN TEXT RPAREN SEMICOLON .)
+    ELSE            reduce using rule 30 (writing -> WRITELN LPAREN TEXT RPAREN SEMICOLON .)
+
+
+state 117
+
+    (31) writing -> WRITELN LPAREN id_num RPAREN SEMICOLON .
+
+    ID              reduce using rule 31 (writing -> WRITELN LPAREN id_num RPAREN SEMICOLON .)
+    WRITELN         reduce using rule 31 (writing -> WRITELN LPAREN id_num RPAREN SEMICOLON .)
+    WHILE           reduce using rule 31 (writing -> WRITELN LPAREN id_num RPAREN SEMICOLON .)
+    IF              reduce using rule 31 (writing -> WRITELN LPAREN id_num RPAREN SEMICOLON .)
+    FOR             reduce using rule 31 (writing -> WRITELN LPAREN id_num RPAREN SEMICOLON .)
+    END             reduce using rule 31 (writing -> WRITELN LPAREN id_num RPAREN SEMICOLON .)
+    ELSE            reduce using rule 31 (writing -> WRITELN LPAREN id_num RPAREN SEMICOLON .)
+
+
+state 118
+
+    (77) otherBegin_if -> BEGIN . instruction END instruction
+    (23) instruction -> . asignation instruction
+    (24) instruction -> . writing instruction
+    (25) instruction -> . cycles instruction
+    (26) instruction -> . empty
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (17) empty -> .
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    END             reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+    asignation                     shift and go to state 21
+    for                            shift and go to state 13
+    instruction                    shift and go to state 129
+    writing                        shift and go to state 14
+    type_cycle                     shift and go to state 22
+    while                          shift and go to state 23
+    cycles                         shift and go to state 24
+    empty                          shift and go to state 15
+    if                             shift and go to state 12
+
+state 119
+
+    (28) instruction_one_line -> writing .
+
+    END             reduce using rule 28 (instruction_one_line -> writing .)
+    ID              reduce using rule 28 (instruction_one_line -> writing .)
+    WRITELN         reduce using rule 28 (instruction_one_line -> writing .)
+    WHILE           reduce using rule 28 (instruction_one_line -> writing .)
+    IF              reduce using rule 28 (instruction_one_line -> writing .)
+    FOR             reduce using rule 28 (instruction_one_line -> writing .)
+    ELSE            reduce using rule 28 (instruction_one_line -> writing .)
+
+
+state 120
+
+    (42) if -> IF internexpression op_cycle THEN instruction_one_line .
+    (45) if -> IF internexpression op_cycle THEN instruction_one_line . ELSE otherBegin
+    (46) if -> IF internexpression op_cycle THEN instruction_one_line . ELSE instruction_one_line
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ID              reduce using rule 42 (if -> IF internexpression op_cycle THEN instruction_one_line .)
+    WRITELN         reduce using rule 42 (if -> IF internexpression op_cycle THEN instruction_one_line .)
+    WHILE           reduce using rule 42 (if -> IF internexpression op_cycle THEN instruction_one_line .)
+    IF              reduce using rule 42 (if -> IF internexpression op_cycle THEN instruction_one_line .)
+    FOR             reduce using rule 42 (if -> IF internexpression op_cycle THEN instruction_one_line .)
+    END             reduce using rule 42 (if -> IF internexpression op_cycle THEN instruction_one_line .)
+    ELSE            shift and go to state 130
+
+  ! ELSE            [ reduce using rule 42 (if -> IF internexpression op_cycle THEN instruction_one_line .) ]
+
+
+state 121
+
+    (27) instruction_one_line -> asignation .
+
+    END             reduce using rule 27 (instruction_one_line -> asignation .)
+    ID              reduce using rule 27 (instruction_one_line -> asignation .)
+    WRITELN         reduce using rule 27 (instruction_one_line -> asignation .)
+    WHILE           reduce using rule 27 (instruction_one_line -> asignation .)
+    IF              reduce using rule 27 (instruction_one_line -> asignation .)
+    FOR             reduce using rule 27 (instruction_one_line -> asignation .)
+    ELSE            reduce using rule 27 (instruction_one_line -> asignation .)
+
+
+state 122
+
+    (41) if -> IF internexpression op_cycle THEN otherBegin_if .
+    (43) if -> IF internexpression op_cycle THEN otherBegin_if . ELSE otherBegin
+    (44) if -> IF internexpression op_cycle THEN otherBegin_if . ELSE instruction_one_line
+
+  ! shift/reduce conflict for ELSE resolved as shift
+    ID              reduce using rule 41 (if -> IF internexpression op_cycle THEN otherBegin_if .)
+    WRITELN         reduce using rule 41 (if -> IF internexpression op_cycle THEN otherBegin_if .)
+    WHILE           reduce using rule 41 (if -> IF internexpression op_cycle THEN otherBegin_if .)
+    IF              reduce using rule 41 (if -> IF internexpression op_cycle THEN otherBegin_if .)
+    FOR             reduce using rule 41 (if -> IF internexpression op_cycle THEN otherBegin_if .)
+    END             reduce using rule 41 (if -> IF internexpression op_cycle THEN otherBegin_if .)
+    ELSE            shift and go to state 131
+
+  ! ELSE            [ reduce using rule 41 (if -> IF internexpression op_cycle THEN otherBegin_if .) ]
+
+
+state 123
+
+    (29) instruction_one_line -> cycles .
+    (39) type_cycle -> cycles . instruction
+    (23) instruction -> . asignation instruction
+    (24) instruction -> . writing instruction
+    (25) instruction -> . cycles instruction
+    (26) instruction -> . empty
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (17) empty -> .
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! reduce/reduce conflict for END resolved using rule 17 (empty -> .)
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! reduce/reduce conflict for WHILE resolved using rule 17 (empty -> .)
+  ! reduce/reduce conflict for IF resolved using rule 17 (empty -> .)
+  ! reduce/reduce conflict for FOR resolved using rule 17 (empty -> .)
+  ! reduce/reduce conflict for ELSE resolved using rule 17 (empty -> .)
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    END             reduce using rule 17 (empty -> .)
+    ELSE            reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+  ! END             [ reduce using rule 29 (instruction_one_line -> cycles .) ]
+  ! ID              [ reduce using rule 29 (instruction_one_line -> cycles .) ]
+  ! WRITELN         [ reduce using rule 29 (instruction_one_line -> cycles .) ]
+  ! WHILE           [ reduce using rule 29 (instruction_one_line -> cycles .) ]
+  ! IF              [ reduce using rule 29 (instruction_one_line -> cycles .) ]
+  ! FOR             [ reduce using rule 29 (instruction_one_line -> cycles .) ]
+  ! ELSE            [ reduce using rule 29 (instruction_one_line -> cycles .) ]
+  ! ID              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! FOR             [ reduce using rule 17 (empty -> .) ]
+
+    asignation                     shift and go to state 21
+    for                            shift and go to state 13
+    instruction                    shift and go to state 132
+    writing                        shift and go to state 14
+    type_cycle                     shift and go to state 22
+    while                          shift and go to state 23
+    cycles                         shift and go to state 24
+    empty                          shift and go to state 15
+    if                             shift and go to state 12
+
+state 124
+
+    (12) var_declaration_2 -> ID var_declaration_3 COLON type_specifier SEMICOLON . var_declaration_4
+    (15) var_declaration_4 -> . var_declaration_2
+    (16) var_declaration_4 -> . empty
+    (12) var_declaration_2 -> . ID var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4
+    (17) empty -> .
+
+    ID              shift and go to state 29
+    PROGRAM         reduce using rule 17 (empty -> .)
+    USES            reduce using rule 17 (empty -> .)
+    VAR             reduce using rule 17 (empty -> .)
+    BEGIN           reduce using rule 17 (empty -> .)
+    $end            reduce using rule 17 (empty -> .)
+
+    var_declaration_4              shift and go to state 133
+    var_declaration_2              shift and go to state 134
+    empty                          shift and go to state 135
+
+state 125
+
+    (76) otherBegin -> BEGIN instruction . END SEMICOLON instruction
+
+    END             shift and go to state 136
+
+
+state 126
+
+    (59) expression -> id_num type_op_math id_num ISEQUAL id_num .
+
+    AND             reduce using rule 59 (expression -> id_num type_op_math id_num ISEQUAL id_num .)
+    OR              reduce using rule 59 (expression -> id_num type_op_math id_num ISEQUAL id_num .)
+    XOR             reduce using rule 59 (expression -> id_num type_op_math id_num ISEQUAL id_num .)
+    NOT             reduce using rule 59 (expression -> id_num type_op_math id_num ISEQUAL id_num .)
+    THEN            reduce using rule 59 (expression -> id_num type_op_math id_num ISEQUAL id_num .)
+    DO              reduce using rule 59 (expression -> id_num type_op_math id_num ISEQUAL id_num .)
+    RPAREN          reduce using rule 59 (expression -> id_num type_op_math id_num ISEQUAL id_num .)
+
+
+state 127
+
+    (48) for -> FOR asignation_for DOWNTO id_num DO otherBegin .
+
+    END             reduce using rule 48 (for -> FOR asignation_for DOWNTO id_num DO otherBegin .)
+    ID              reduce using rule 48 (for -> FOR asignation_for DOWNTO id_num DO otherBegin .)
+    WRITELN         reduce using rule 48 (for -> FOR asignation_for DOWNTO id_num DO otherBegin .)
+    WHILE           reduce using rule 48 (for -> FOR asignation_for DOWNTO id_num DO otherBegin .)
+    IF              reduce using rule 48 (for -> FOR asignation_for DOWNTO id_num DO otherBegin .)
+    FOR             reduce using rule 48 (for -> FOR asignation_for DOWNTO id_num DO otherBegin .)
+    ELSE            reduce using rule 48 (for -> FOR asignation_for DOWNTO id_num DO otherBegin .)
+
+
+state 128
+
+    (47) for -> FOR asignation_for TO id_num DO otherBegin .
+
+    END             reduce using rule 47 (for -> FOR asignation_for TO id_num DO otherBegin .)
+    ID              reduce using rule 47 (for -> FOR asignation_for TO id_num DO otherBegin .)
+    WRITELN         reduce using rule 47 (for -> FOR asignation_for TO id_num DO otherBegin .)
+    WHILE           reduce using rule 47 (for -> FOR asignation_for TO id_num DO otherBegin .)
+    IF              reduce using rule 47 (for -> FOR asignation_for TO id_num DO otherBegin .)
+    FOR             reduce using rule 47 (for -> FOR asignation_for TO id_num DO otherBegin .)
+    ELSE            reduce using rule 47 (for -> FOR asignation_for TO id_num DO otherBegin .)
+
+
+state 129
+
+    (77) otherBegin_if -> BEGIN instruction . END instruction
+
+    END             shift and go to state 137
+
+
+state 130
+
+    (45) if -> IF internexpression op_cycle THEN instruction_one_line ELSE . otherBegin
+    (46) if -> IF internexpression op_cycle THEN instruction_one_line ELSE . instruction_one_line
+    (76) otherBegin -> . BEGIN instruction END SEMICOLON instruction
+    (27) instruction_one_line -> . asignation
+    (28) instruction_one_line -> . writing
+    (29) instruction_one_line -> . cycles
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+    BEGIN           shift and go to state 111
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+    cycles                         shift and go to state 123
+    for                            shift and go to state 13
+    while                          shift and go to state 23
+    asignation                     shift and go to state 121
+    type_cycle                     shift and go to state 22
+    instruction_one_line           shift and go to state 138
+    otherBegin                     shift and go to state 139
+    writing                        shift and go to state 119
+    if                             shift and go to state 12
+
+state 131
+
+    (43) if -> IF internexpression op_cycle THEN otherBegin_if ELSE . otherBegin
+    (44) if -> IF internexpression op_cycle THEN otherBegin_if ELSE . instruction_one_line
+    (76) otherBegin -> . BEGIN instruction END SEMICOLON instruction
+    (27) instruction_one_line -> . asignation
+    (28) instruction_one_line -> . writing
+    (29) instruction_one_line -> . cycles
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+    BEGIN           shift and go to state 111
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+    cycles                         shift and go to state 123
+    for                            shift and go to state 13
+    while                          shift and go to state 23
+    asignation                     shift and go to state 121
+    type_cycle                     shift and go to state 22
+    instruction_one_line           shift and go to state 140
+    otherBegin                     shift and go to state 141
+    writing                        shift and go to state 119
+    if                             shift and go to state 12
+
+state 132
+
+    (39) type_cycle -> cycles instruction .
+
+    END             reduce using rule 39 (type_cycle -> cycles instruction .)
+    ID              reduce using rule 39 (type_cycle -> cycles instruction .)
+    WRITELN         reduce using rule 39 (type_cycle -> cycles instruction .)
+    WHILE           reduce using rule 39 (type_cycle -> cycles instruction .)
+    IF              reduce using rule 39 (type_cycle -> cycles instruction .)
+    FOR             reduce using rule 39 (type_cycle -> cycles instruction .)
+    ELSE            reduce using rule 39 (type_cycle -> cycles instruction .)
+
+
+state 133
+
+    (12) var_declaration_2 -> ID var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4 .
+
+    PROGRAM         reduce using rule 12 (var_declaration_2 -> ID var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4 .)
+    USES            reduce using rule 12 (var_declaration_2 -> ID var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4 .)
+    VAR             reduce using rule 12 (var_declaration_2 -> ID var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4 .)
+    BEGIN           reduce using rule 12 (var_declaration_2 -> ID var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4 .)
+    $end            reduce using rule 12 (var_declaration_2 -> ID var_declaration_3 COLON type_specifier SEMICOLON var_declaration_4 .)
+
+
+state 134
+
+    (15) var_declaration_4 -> var_declaration_2 .
+
+    PROGRAM         reduce using rule 15 (var_declaration_4 -> var_declaration_2 .)
+    USES            reduce using rule 15 (var_declaration_4 -> var_declaration_2 .)
+    VAR             reduce using rule 15 (var_declaration_4 -> var_declaration_2 .)
+    BEGIN           reduce using rule 15 (var_declaration_4 -> var_declaration_2 .)
+    $end            reduce using rule 15 (var_declaration_4 -> var_declaration_2 .)
+
+
+state 135
+
+    (16) var_declaration_4 -> empty .
+
+    PROGRAM         reduce using rule 16 (var_declaration_4 -> empty .)
+    USES            reduce using rule 16 (var_declaration_4 -> empty .)
+    VAR             reduce using rule 16 (var_declaration_4 -> empty .)
+    BEGIN           reduce using rule 16 (var_declaration_4 -> empty .)
+    $end            reduce using rule 16 (var_declaration_4 -> empty .)
+
+
+state 136
+
+    (76) otherBegin -> BEGIN instruction END . SEMICOLON instruction
+
+    SEMICOLON       shift and go to state 142
+
+
+state 137
+
+    (77) otherBegin_if -> BEGIN instruction END . instruction
+    (23) instruction -> . asignation instruction
+    (24) instruction -> . writing instruction
+    (25) instruction -> . cycles instruction
+    (26) instruction -> . empty
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (17) empty -> .
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    END             reduce using rule 17 (empty -> .)
+    ELSE            reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+  ! ID              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! FOR             [ reduce using rule 17 (empty -> .) ]
+
+    asignation                     shift and go to state 21
+    for                            shift and go to state 13
+    instruction                    shift and go to state 143
+    writing                        shift and go to state 14
+    type_cycle                     shift and go to state 22
+    while                          shift and go to state 23
+    cycles                         shift and go to state 24
+    empty                          shift and go to state 15
+    if                             shift and go to state 12
+
+state 138
+
+    (46) if -> IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line .
+
+    ID              reduce using rule 46 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line .)
+    WRITELN         reduce using rule 46 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line .)
+    WHILE           reduce using rule 46 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line .)
+    IF              reduce using rule 46 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line .)
+    FOR             reduce using rule 46 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line .)
+    END             reduce using rule 46 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line .)
+    ELSE            reduce using rule 46 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line .)
+
+
+state 139
+
+    (45) if -> IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin .
+
+    ID              reduce using rule 45 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin .)
+    WRITELN         reduce using rule 45 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin .)
+    WHILE           reduce using rule 45 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin .)
+    IF              reduce using rule 45 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin .)
+    FOR             reduce using rule 45 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin .)
+    END             reduce using rule 45 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin .)
+    ELSE            reduce using rule 45 (if -> IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin .)
+
+
+state 140
+
+    (44) if -> IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line .
+
+    ID              reduce using rule 44 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line .)
+    WRITELN         reduce using rule 44 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line .)
+    WHILE           reduce using rule 44 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line .)
+    IF              reduce using rule 44 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line .)
+    FOR             reduce using rule 44 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line .)
+    END             reduce using rule 44 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line .)
+    ELSE            reduce using rule 44 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line .)
+
+
+state 141
+
+    (43) if -> IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin .
+
+    ID              reduce using rule 43 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin .)
+    WRITELN         reduce using rule 43 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin .)
+    WHILE           reduce using rule 43 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin .)
+    IF              reduce using rule 43 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin .)
+    FOR             reduce using rule 43 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin .)
+    END             reduce using rule 43 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin .)
+    ELSE            reduce using rule 43 (if -> IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin .)
+
+
+state 142
+
+    (76) otherBegin -> BEGIN instruction END SEMICOLON . instruction
+    (23) instruction -> . asignation instruction
+    (24) instruction -> . writing instruction
+    (25) instruction -> . cycles instruction
+    (26) instruction -> . empty
+    (33) asignation -> . ID EQUAL id_num SEMICOLON
+    (30) writing -> . WRITELN LPAREN TEXT RPAREN SEMICOLON
+    (31) writing -> . WRITELN LPAREN id_num RPAREN SEMICOLON
+    (32) writing -> . WRITELN SEMICOLON
+    (35) cycles -> . type_cycle
+    (17) empty -> .
+    (36) type_cycle -> . while
+    (37) type_cycle -> . if
+    (38) type_cycle -> . for
+    (39) type_cycle -> . cycles instruction
+    (40) while -> . WHILE internexpression op_cycle DO otherBegin
+    (41) if -> . IF internexpression op_cycle THEN otherBegin_if
+    (42) if -> . IF internexpression op_cycle THEN instruction_one_line
+    (43) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE otherBegin
+    (44) if -> . IF internexpression op_cycle THEN otherBegin_if ELSE instruction_one_line
+    (45) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE otherBegin
+    (46) if -> . IF internexpression op_cycle THEN instruction_one_line ELSE instruction_one_line
+    (47) for -> . FOR asignation_for TO id_num DO otherBegin
+    (48) for -> . FOR asignation_for DOWNTO id_num DO otherBegin
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for WRITELN resolved as shift
+  ! shift/reduce conflict for WHILE resolved as shift
+  ! shift/reduce conflict for IF resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    ID              shift and go to state 18
+    WRITELN         shift and go to state 17
+    END             reduce using rule 17 (empty -> .)
+    ELSE            reduce using rule 17 (empty -> .)
+    WHILE           shift and go to state 11
+    IF              shift and go to state 19
+    FOR             shift and go to state 16
+
+  ! ID              [ reduce using rule 17 (empty -> .) ]
+  ! WRITELN         [ reduce using rule 17 (empty -> .) ]
+  ! WHILE           [ reduce using rule 17 (empty -> .) ]
+  ! IF              [ reduce using rule 17 (empty -> .) ]
+  ! FOR             [ reduce using rule 17 (empty -> .) ]
+
+    asignation                     shift and go to state 21
+    for                            shift and go to state 13
+    instruction                    shift and go to state 144
+    writing                        shift and go to state 14
+    type_cycle                     shift and go to state 22
+    while                          shift and go to state 23
+    cycles                         shift and go to state 24
+    empty                          shift and go to state 15
+    if                             shift and go to state 12
+
+state 143
+
+    (77) otherBegin_if -> BEGIN instruction END instruction .
+
+    END             reduce using rule 77 (otherBegin_if -> BEGIN instruction END instruction .)
+    ID              reduce using rule 77 (otherBegin_if -> BEGIN instruction END instruction .)
+    WRITELN         reduce using rule 77 (otherBegin_if -> BEGIN instruction END instruction .)
+    WHILE           reduce using rule 77 (otherBegin_if -> BEGIN instruction END instruction .)
+    IF              reduce using rule 77 (otherBegin_if -> BEGIN instruction END instruction .)
+    FOR             reduce using rule 77 (otherBegin_if -> BEGIN instruction END instruction .)
+    ELSE            reduce using rule 77 (otherBegin_if -> BEGIN instruction END instruction .)
+
+
+state 144
+
+    (76) otherBegin -> BEGIN instruction END SEMICOLON instruction .
+
+    END             reduce using rule 76 (otherBegin -> BEGIN instruction END SEMICOLON instruction .)
+    ID              reduce using rule 76 (otherBegin -> BEGIN instruction END SEMICOLON instruction .)
+    WRITELN         reduce using rule 76 (otherBegin -> BEGIN instruction END SEMICOLON instruction .)
+    WHILE           reduce using rule 76 (otherBegin -> BEGIN instruction END SEMICOLON instruction .)
+    IF              reduce using rule 76 (otherBegin -> BEGIN instruction END SEMICOLON instruction .)
+    FOR             reduce using rule 76 (otherBegin -> BEGIN instruction END SEMICOLON instruction .)
+    ELSE            reduce using rule 76 (otherBegin -> BEGIN instruction END SEMICOLON instruction .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for ID in state 14 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 14 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 14 resolved as shift
+WARNING: shift/reduce conflict for IF in state 14 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 14 resolved as shift
+WARNING: shift/reduce conflict for ID in state 21 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 21 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 21 resolved as shift
+WARNING: shift/reduce conflict for IF in state 21 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 21 resolved as shift
+WARNING: shift/reduce conflict for ID in state 24 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 24 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 24 resolved as shift
+WARNING: shift/reduce conflict for IF in state 24 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 24 resolved as shift
+WARNING: shift/reduce conflict for LESSEQUAL in state 36 resolved as shift
+WARNING: shift/reduce conflict for LESS in state 36 resolved as shift
+WARNING: shift/reduce conflict for GREATER in state 36 resolved as shift
+WARNING: shift/reduce conflict for GREATEREQUAL in state 36 resolved as shift
+WARNING: shift/reduce conflict for ISEQUAL in state 36 resolved as shift
+WARNING: shift/reduce conflict for DEQUAL in state 36 resolved as shift
+WARNING: shift/reduce conflict for DISTINT in state 36 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 120 resolved as shift
+WARNING: shift/reduce conflict for ELSE in state 122 resolved as shift
+WARNING: shift/reduce conflict for ID in state 123 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 123 resolved as shift
+WARNING: shift/reduce conflict for ID in state 123 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 123 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 123 resolved as shift
+WARNING: shift/reduce conflict for IF in state 123 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 123 resolved as shift
+WARNING: shift/reduce conflict for ID in state 137 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 137 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 137 resolved as shift
+WARNING: shift/reduce conflict for IF in state 137 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 137 resolved as shift
+WARNING: shift/reduce conflict for ID in state 142 resolved as shift
+WARNING: shift/reduce conflict for WRITELN in state 142 resolved as shift
+WARNING: shift/reduce conflict for WHILE in state 142 resolved as shift
+WARNING: shift/reduce conflict for IF in state 142 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 142 resolved as shift
+WARNING: reduce/reduce conflict in state 46 resolved using rule (instruction -> cycles instruction)
+WARNING: rejected rule (type_cycle -> cycles instruction) in state 46
+WARNING: reduce/reduce conflict in state 123 resolved using rule (empty -> <empty>)
+WARNING: rejected rule (instruction_one_line -> cycles) in state 123
+WARNING: Rule (instruction_one_line -> cycles) is never reduced
