@@ -544,7 +544,7 @@ if __name__ == '__main__':
     if (len(sys.argv) > 1):
         fin = sys.argv[1]
     else:
-        fin = 'parser.pas'
+        fin = 'testingsFiles/parser.pas'
 
     f = open(fin, 'r')
     data = f.read()
