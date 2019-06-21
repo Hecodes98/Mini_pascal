@@ -249,7 +249,10 @@ def p_parentheses(p):
 
 
 def p_expression_1(p):
-    '''expression : math type_op math
+    '''expression : callFunctions
+                    | callFunctions type_op math
+                    | callFunctions type_op callFunctions
+                    | math type_op math
                     | ID
                     | math ISEQUAL boolean
                     | boolean ISEQUAL math

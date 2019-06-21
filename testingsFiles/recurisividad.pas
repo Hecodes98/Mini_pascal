@@ -55,20 +55,19 @@ program recursivo;
       begin
        if frac(num / p) = 0 then
        begin
-       cuenta := cuenta + (num div p);
-       write('  ',trunc(num / p));
-       end;
+       cuenta := cuenta + (num mod p);
+       writeln('  ',trunc(num / p));
+       end
        defectuoso := defectuoso(num, p - 1);
       end
     else
       begin
       cuenta := cuenta;
       if cuenta <> num then
-      defectuoso := true
+      defectuoso := true;
     else
       defectuoso := false;
-      write('  ');
-      exit;
+      writeln('  ');
       end;
    end;
  
@@ -77,24 +76,19 @@ program recursivo;
    var
       nu : integer;
    begin
-      write('   Entre Numero Entero : ');
+      writeln('   Entre Numero Entero : ');
       readln(nu);
       cuenta := 0;
       writeln('   El Numero es = ',defectuoso(nu,nu));
-      writeln('  Entrado = ',nu,'   Respuesta = ',cuenta);
-      readkey;
+      writeln('  Entrado = ',nu);
    end;
- 
- 
  
    procedure menu;
    var
-     s, g : longint;
+     s, g : integer;
    begin
       salir := false;
    end;
- 
- 
    begin
-      menu;
+    a:=3;
    end.
