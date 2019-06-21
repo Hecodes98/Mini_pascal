@@ -32,6 +32,8 @@ tokens = (
     'INLINE',
     'INTERFACE',
     'INTEGER',
+    'DOUBLE',
+    'FLOAT',
     'REAL',
     'CHAR',
     'LABEL',
@@ -406,13 +408,13 @@ def t_DEFAULT(t):
     return t
 
 
-def t_DO(t):
-    r'do'
+def t_DOUBLE(t):
+    r'double'
     return t
 
 
-def t_DOUBLE(t):
-    r'double'
+def t_DO(t):
+    r'do'
     return t
 
 

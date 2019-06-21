@@ -7,22 +7,22 @@ var
   primo  :boolean;
   num,divisor:integer;
 begin
+
    primo:=true;
    divisor:=2.4;
    writeln('<===Programa que Determina si un Número es Primo o No!!!?_+==>');
    writeln; writeln;
-   write('Introduzca un número===> '); readln(num);
    writeln;writeln;
    while (divisor<num) and primo do
    begin
-     if num mod divisor = 0 then
+     if num mod divisor = true and 1<divisor then
           primo:=false;
-     divisor:= #divisor+1
+     divisor:= divisor+1;
    end;
  if primo = true then
-    writeln(num,' Es número Primo...')
+    writeln(' Es número Primo...');
  else
-    writeln(num,' No es un número Primo...');
+    writeln(' No es un número Primo...');
  writeln;
  writeln;
  writeln('Diseñado por: Victor Manuel Evaristo Salinas');
@@ -32,18 +32,4 @@ begin
  writeln;
 end.
 
-
-function max(num1, num2: integer): integer;
-
-var
-   (* local variable declaration *)
-   result: integer;
-
-begin
-   if (num1 > num2) then
-      result := num1
-   
-   else
-      result := num2;
-   max := result;
-end;
+//dadjasjdasd

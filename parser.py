@@ -4,6 +4,7 @@ import miniPascal
 import sys
 
 VERBOSE = 1
+errors = 0
 
 
 def p_program(p):
@@ -24,6 +25,7 @@ def p_declaration_list_2(p):
 def p_declaration(p):
     '''declaration : header_declaration
                             | var_declaration
+                            | function_declaration
                             | procedure_declaration'''
     pass
 
@@ -71,6 +73,24 @@ def p_empty(p):
     pass
 
 
+def p_math(p):
+    'math : factor mathi'
+    pass
+
+
+def p_mathi(p):
+    '''mathi : type_op_math factor mathi
+             | empty'''
+    pass
+
+
+def p_factor(p):
+    '''factor : LPAREN math RPAREN
+              | NUMBER
+              | ID'''
+    pass
+
+
 def p_type_specifier_1(p):
     'type_specifier : INTEGER'
     pass
@@ -91,6 +111,11 @@ def p_type_specifier_5(p):
     pass
 
 
+def p_type_specifier_6(p):
+    'type_specifier : DOUBLE'
+    pass
+
+
 def p_procedure_declaration(p):
     'procedure_declaration : BEGIN instruction END DOT'
     pass
@@ -100,7 +125,24 @@ def p_instruction(p):
     '''instruction : asignation instruction
                         | writing instruction
                         | cycles instruction
+                        | callFunctions instruction
                                     | empty'''
+    pass
+
+
+def p_callFunctions(p):
+    'callFunctions : ID LPAREN params RPAREN '
+    pass
+
+
+def p_params(p):
+    'params : math params2'
+    pass
+
+
+def p_params2(p):
+    '''params2 : COMMA math 
+                | empty'''
     pass
 
 
@@ -111,9 +153,26 @@ def p_instruction_one_line(p):
     pass
 
 
+def p_id_text_l(p):
+    '''id_text_l : callFunctions COMMA id_text_l 
+               | ID COMMA id_text_l            
+               | empty'''
+    pass
+
+
+def p_id_text_r(p):
+    '''id_text_r : COMMA callFunctions id_text_r
+               | COMMA ID id_text_r
+               | empty'''
+    pass
+
+
 def p_writing_1(p):
-    '''writing : WRITELN LPAREN TEXT RPAREN SEMICOLON
-                | WRITELN LPAREN id_num RPAREN SEMICOLON   '''
+    '''writing : WRITELN LPAREN id_text_l TEXT id_text_r RPAREN SEMICOLON
+                | WRITELN LPAREN id_num RPAREN SEMICOLON
+                | READLN LPAREN ID RPAREN SEMICOLON
+                | READLN LPAREN RPAREN SEMICOLON
+                | READLN SEMICOLON'''
     pass
 
 
@@ -123,7 +182,10 @@ def p_writing_2(p):
 
 
 def p_asignation(p):
-    'asignation : ID EQUAL id_num SEMICOLON'
+    '''asignation : ID EQUAL callFunctions SEMICOLON
+                | ID EQUAL math SEMICOLON 
+                | ID EQUAL boolean SEMICOLON
+                | ID EQUAL TEXT SEMICOLON'''
     pass
 
 
@@ -187,28 +249,45 @@ def p_parentheses(p):
 
 
 def p_expression_1(p):
-    'expression : ID type_op ID'
+    '''expression : math type_op math
+                    | ID
+                    | math ISEQUAL boolean
+                    | boolean ISEQUAL math
+                    | expression2'''
     pass
 
 
-def p_id_num(p):
-    '''id_num : NUMBER
-                | ID'''
-
-
-def p_expression_2(p):
-    'expression : id_num type_op id_num'
+def p_expression2(p):
+    '''expression2 : TEXT type_op TEXT
+                  | TEXT type_op ID'''  # TODO Tratar de arreglar esto ID type_op TEXT
     pass
 
 
-def p_expression_5(p):
-    'expression : id_num'
-    pass
+# def p_expression_2(p):
+#     'expression : ID type_op ID'
+#     pass
+
+# def p_expression_1(p):
+#     'expression : ID type_op math'
+#     pass
 
 
-def p_expression_6(p):
-    '''expression : id_num type_op_math id_num ISEQUAL id_num'''
-    pass
+# def p_expression_2(p):
+#     'expression : ID'
+#     pass
+
+
+# def p_expression_3(p):
+#     '''expression : ID ISEQUAL math
+#                   | math ISEQUAL boolean'''
+#     pass
+
+
+# def p_expression_4(p):
+#     '''expression : ID type_op TEXT
+#                   | TEXT type_op TEXT
+#                   | TEXT type_op ID'''
+#     pass
 
 
 def p_type_op_1(p):
@@ -232,17 +311,17 @@ def p_type_op_4(p):
 
 
 def p_type_op_5(p):
-    'type_op : ISEQUAL'
-    pass
-
-
-def p_type_op_6(p):
     'type_op : DEQUAL'
     pass
 
 
-def p_type_op_7(p):
+def p_type_op_6(p):
     'type_op : DISTINT'
+    pass
+
+
+def p_type_op_6(p):
+    'type_op : ISEQUAL'
     pass
 
 
@@ -291,6 +370,16 @@ def p_op_logic_4(p):
     pass
 
 
+def p_id_num(p):
+    '''id_num : NUMBER
+                | ID'''
+
+
+def p_boolean(p):
+    '''boolean : TRUE
+                | FALSE'''
+
+
 def p_otherBegin(p):
     'otherBegin : BEGIN instruction END SEMICOLON instruction'
     pass
@@ -300,239 +389,45 @@ def p_otherBegin_if(p):
     'otherBegin_if : BEGIN instruction END instruction'
     pass
 
-# def p_fun_declaration(p):
-# 	'fun_declaration : type_specifier ID LPAREN params RPAREN compount_stmt'
-# 	pass
 
-# def p_params_1(p):
-# 	'params : param_list'
-# 	pass
-
-# def p_params_2(p):
-# 	'params : VOID'
-# 	pass
-
-# def p_param_list_1(p):
-# 	'param_list : param_list COMMA param'
-# 	pass
-
-# def p_param_list_2(p):
-# 	'param_list : param'
-# 	pass
-
-# def p_param_list_3(p):
-# 	'param_list : empty'
-# 	pass
-
-# def p_param_1(p):
-# 	'param : type_specifier ID'
-# 	pass
-
-# def p_param_2(p):
-# 	'param : type_specifier ID LBRACKET RBRACKET'
-# 	pass
-
-# def p_compount_stmt(p):
-# 	'compount_stmt : LBLOCK local_declarations statement_list RBLOCK'
-# 	pass
-
-# def p_local_declarations_1(p):
-# 	'local_declarations : local_declarations var_declaration'
-# 	pass
-
-# def p_local_declarations_2(p):
-# 	'local_declarations : empty'
-# 	pass
-
-# def p_statement_list_1(p):
-# 	'statement_list : statement_list statement'
-# 	pass
-
-# def p_statement_list_2(p):
-# 	'statement_list : empty'
-# 	pass
-
-# def p_statement(p):
-# 	'''statement : expression_stmt
-# 				| compount_stmt
-# 				| selection_stmt
-# 				| iteration_stmt
-# 				| return_stmt
-# 	'''
-# 	pass
-
-# def p_expression_stmt_1(p):
-# 	'expression_stmt : expression SEMICOLON'
-# 	pass
-
-# def p_expression_stmt_2(p):
-# 	'expression_stmt : SEMICOLON'
-# 	pass
-
-# def p_selection_stmt_1(p):
-# 	'selection_stmt : IF LPAREN expression RPAREN statement'
-# 	pass
-
-# def p_selection_stmt_2(p):
-# 	'selection_stmt : IF LPAREN expression RPAREN statement ELSE statement'
-# 	pass
-
-# def p_selection_stmt_3(p):
-# 	'selection_stmt : SWITCH LPAREN var RPAREN statement'
-# 	pass
-
-# def p_selection_stmt_4(p):
-# 	'selection_stmt : CASE NUMBER COLON statement BREAK SEMICOLON'
-# 	pass
-
-# def p_selection_stmt_5(p):
-# 	'selection_stmt : DEFAULT COLON statement BREAK SEMICOLON'
-# 	pass
-
-# def p_iteration_stmt_1(p):
-# 	'iteration_stmt : WHILE LPAREN expression RPAREN statement'
-# 	pass
+def p_Begin_function(p):
+    '''Begin_function : var_declaration BEGIN instruction END SEMICOLON instruction
+                        | BEGIN instruction END SEMICOLON instruction'''
+    pass
 
 
-# def p_iteration_stmt_2(p):
-# 	'iteration_stmt : FOR LPAREN var_declaration2 SEMICOLON expression SEMICOLON additive_expression RPAREN statement'
-# 	pass
-
-# def p_return_stmt_1(p):
-# 	'return_stmt : RETURN SEMICOLON'
-# 	pass
-
-# def p_return_stmt_2(p):
-# 	'return_stmt : RETURN expression SEMICOLON'
-# 	pass
-
-# def p_expression_1(p):
-# 	'expression : var EQUAL expression'
-# 	pass
-
-# def p_expression_2(p):
-# 	'expression : simple_expression'
-# 	pass
-
-# def p_expression_3(p):
-# 	'expression : var EQUAL AMPERSANT ID'
-# 	pass
-
-# def p_var_1(p):
-# 	'var : ID'
-# 	pass
-
-# def p_var_2(p):
-# 	'var : ID LBRACKET expression RBRACKET'
-# 	pass
-
-# def p_simple_expression_1(p):
-# 	'simple_expression : additive_expression relop additive_expression'
-# 	pass
-
-# def p_simple_expression_2(p):
-# 	'simple_expression : additive_expression'
-# 	pass
+def p_function_declaration(p):
+    '''function_declaration : FUNCTION ID LPAREN fun_param RPAREN COLON type_specifier SEMICOLON Begin_function
+                            | PROCEDURE ID LPAREN fun_param RPAREN SEMICOLON Begin_function
+                            | PROCEDURE ID SEMICOLON Begin_function'''
+    pass
 
 
-# def p_relop(p):
-# 	'''relop : LESS
-# 			| LESSEQUAL
-# 			| GREATER
-# 			| GREATEREQUAL
-# 			| DEQUAL
-# 			| DISTINT
-# 			| ISEQUAL
-# 	'''
-# 	pass
-
-# def p_additive_expression_1(p):
-# 	'''additive_expression : additive_expression addop term
-
-#         '''
-# 	pass
-
-# def p_additive_expression_2(p):
-# 	'additive_expression : term'
-# 	pass
-
-# def p_additive_expression_3(p):
-# 	'additive_expression : term MINUSMINUS'
-# 	pass
-
-# def p_additive_expression_4(p):
-# 	'additive_expression : term PLUSPLUS'
-# 	pass
-
-# def p_addop(p):
-# 	'''addop : PLUS
-# 			| MINUS
-# 	'''
-# 	pass
-
-# def p_term_1(p):
-# 	'term : term mulop factor'
-# 	pass
-
-# def p_term_2(p):
-# 	'term : factor'
-# 	pass
+def p_fun_param_1(p):
+    '''fun_param : ID fun_param_2 COLON type_specifier fun_param
+                 | SEMICOLON ID fun_param_2 COLON type_specifier fun_param
+                 | empty'''
+    pass
 
 
-# def p_mulop(p):
-# 	'''mulop : 	TIMES
-# 				| DIVIDE
-# 	'''
-# 	pass
-
-# def p_factor_1(p):
-# 	'factor : LPAREN expression RPAREN'
-# 	pass
-
-# def p_factor_2(p):
-# 	'factor : var'
-# 	pass
-
-# def p_factor_3(p):
-# 	'factor : call'
-# 	pass
-
-# def p_factor_4(p):
-# 	'factor : NUMBER'
-# 	pass
-
-
-# def p_call(p):
-# 	'call : ID LPAREN args RPAREN'
-# 	pass
-
-# def p_args(p):
-# 	'''args : args_list
-# 			| empty
-# 	'''
-# 	pass
-
-# def p_args_list_1(p):
-# 	'args_list : args_list COMMA expression'
-# 	pass
-
-# def p_args_list_2(p):
-# 	'args_list : expression'
-# 	pass
-
-# def p_empty(p):
-# 	'empty :'
-# 	pass
+def p_fun_param_2(p):
+    '''fun_param_2 : COMMA ID fun_param_2
+                            | empty'''
+    pass
 
 
 def p_error(p):
+    global errors
     if VERBOSE:
         if p is not None:
-            print("ERROR SINTACTICO EN LA LINEA " + str(p.lexer.lineno) +
-                  " NO SE ESPERABA EL Token  " + str(p.value))
+            print("Error sintactico en la linea " + str(p.lexer.lineno) +
+                  " No se esperaba el token  " + str(p.value))
+            errors += 1
         else:
-            print("ERROR SINTACTICO EN LA LINEA: " +
+            print("Error sintantico en la linea: " +
                   str(cminus_lexer.lexer.lineno))
+            errors += 1
+
     else:
         raise Exception('syntax', 'error')
 
@@ -544,11 +439,12 @@ if __name__ == '__main__':
     if (len(sys.argv) > 1):
         fin = sys.argv[1]
     else:
-        fin = 'testingsFiles/parser.pas'
+        fin = 'testingsFiles/recurisividad.pas'
 
     f = open(fin, 'r')
     data = f.read()
     #print (data)
     parser.parse(data, tracking=True)
-    print("Amiguito, tengo el placer de informa que Tu parser reconocio correctamente todo")
+    if not errors:
+        print("Congratulations, your code is vientos")
     # input()
